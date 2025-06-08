@@ -1,0 +1,15 @@
+[
+    {
+      "id": 1,
+      "product": "Sugar",
+      "Unit of Measure": "kg",
+      "Quantity": 10
+    },
+    {
+      "id": 2,
+      "product": "Black Tea",
+      "Unit of Measure": "Box",
+      "Quantity": 20
+    }
+  ]
+  

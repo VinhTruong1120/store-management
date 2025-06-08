@@ -1,0 +1,45 @@
+{
+    "categories": [
+      {
+        "id": "cafe",
+        "name": "Cà phê",
+        "icon": "fa-mug-hot"
+      },
+      {
+        "id": "tra",
+        "name": "Trà",
+        "icon": "fa-leaf"
+      },
+      {
+        "id": "daxay",
+        "name": "Đá xay",
+        "icon": "fa-blender"
+      },
+      {
+        "id": "banh",
+        "name": "Bánh ngọt",
+        "icon": "fa-cookie-bite"
+      }
+    ],
+    "products": {
+      "cafe": [
+        { "name": "Cà phê sữa đá", "price": 28000 },
+        { "name": "Cà phê muối", "price": 32000 },
+        { "name": "Cà phê đen", "price": 25000}
+      ],
+      "tra": [
+        { "name": "Trà sen vàng", "price": 27000 },
+        { "name": "Trà đào cam sả", "price": 30000 }
+      ],
+      "daxay": [
+        { "name": "Đá xay socola", "price": 35000 },
+        { "name": "Matcha đá xay", "price": 36000 }
+      ],
+      "banh": [
+        { "name": "Bánh phô mai", "price": 25000 },
+        { "name": "Bánh matcha", "price": 27000 },
+        { "name":  "Bánh chuối", "price":  15000}
+      ]
+    }
+  }
+  

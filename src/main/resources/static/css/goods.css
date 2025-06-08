@@ -1,0 +1,11 @@
+.goods-table {
+    overflow-x: auto;
+    width: 90%;
+    margin-left: 10px;
+}
+
+.goods-table table {
+    min-width: 600px; /* hoặc hơn nếu bạn có nhiều cột */
+    table-layout: auto;
+    white-space: nowrap;
+}

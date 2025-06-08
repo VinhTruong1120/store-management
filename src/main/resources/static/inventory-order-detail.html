@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Branche Dashboard</title>
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+    
+    <link rel="stylesheet" href="/css/inventory-order.css">
+</head>
+<body>
+    <!-- Login Form -->
+    <div id="login-screen">
+        <form id="login-form" class="bg-light p-4 rounded shadow">
+            <h4 class="mb-3 text-center text-dark">Login</h4>
+            <div class="mb-3">
+                <input type="text" id="username" class="form-control" placeholder="Username" required>
+            </div>
+            <div class="mb-3">
+                <input type="password" id="password" class="form-control" placeholder="Password" required>
+            </div>
+            <button type="submit" class="btn btn-warning w-100">Login</button>
+        </form>
+        <p id="login-status"></p>
+    </div>
+
+    <!-- Sidebar -->
+    <div id="sidebar" class="d-flex">
+        <nav class="sidebar bg-dark text-light p-3">
+            <h4 id="role" class="text-warning"><i class="fa-solid fa-store"></i></h4>
+            <ul id="sidebar-menu" class="nav flex-column">
+                <li class="nav-item nav-home"><a href="/index.html" class="nav-link"><i class="fa-solid fa-house"></i> Home</a></li>
+                <li class="nav-item nav-goods"><a href="/goods.html" class="nav-link"><i class="fa-solid fa-box"></i> Goods</a></li>
+                <li class="nav-item nav-order"><a href="/order.html" class="nav-link"><i class="fa-solid fa-clipboard-list"></i> Order</a></li>
+                <li class="nav-item nav-staff"><a href="/staff.html" class="nav-link"><i class="fa-solid fa-user"></i> Staff</a></li>
+                <li class="nav-item nav-after-sale"><a href="/after-sale.html" class="nav-link"><i class="fa-solid fa-headset"></i> After-sale</a></li>
+                <li class="nav-item nav-review"><a href="/review.html" class="nav-link"><i class="fa-solid fa-star"></i> Review</a></li>
+                <li class="nav-item mt-auto">
+                    <a href="#" class="nav-link text-danger" onclick="logout()">
+                        <i class="fa-solid fa-right-from-bracket"></i>Logout
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content p-4 w-100">
+        <!-- Header -->
+        <div class="main-header d-flex justify-content-between align-items-center bg-dark p-3 rounded">
+          <h5 class="text-warning mb-0"><i class="fa-solid fa-warehouse"></i> Inventory Order</h5>
+        </div>
+      
+        <!-- Layout 2 cột -->
+        <div class="order-layout mt-4">
+          <!-- Trái: Category + Danh sách nguyên liệu -->
+          <div class="flex-grow-1" style="max-width: 800px;">
+            <!-- Category buttons -->
+            <div id="inventory-category" class="mb-4 d-flex flex-wrap gap-2"></div>
+            <!-- Menu items -->
+            <div id="inventory-menu-list"></div>
+          </div>
+      
+          <!-- Phải: Đơn nguyên liệu đã chọn -->
+          <div class="order-summary bg-light rounded p-3">
+            <h5>Nguyên liệu đã chọn</h5>
+            <div id="inventory-order-items"></div>
+            <hr>
+            <div class="d-flex justify-content-between fw-bold">
+              <span>Tổng mục:</span>
+              <span id="inventory-total-items">0</span>
+            </div>
+            <button class="btn btn-success w-100 mt-4" onclick="submitInventoryOrder()">
+              <i class="fa-solid fa-paper-plane"></i> Gửi đơn đến kho
+            </button>
+          </div>
+        </div>
+      </div>
+      
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/scripts/sidebar-hover.js"></script>
+    <script src="/scripts/login-logout.js"></script>
+    <script src="/scripts/inventory-order-detail.js"></script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+package com.projects.cnpm.Repository;
+
+import com.projects.cnpm.DAO.Entity.cuahang_entity;
+import com.projects.cnpm.DAO.Entity.don_hang_entity;
+import com.projects.cnpm.DAO.Entity.nhanvien_entity;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface don_hang_repository extends JpaRepository<don_hang_entity,String> {
+
+    @Query("Select dh from don_hang_entity dh where function('MONTH',dh.ngay_hoang_thanh) = :month and function('YEAR',dh.ngay_hoang_thanh) = :year and dh.store = :store and dh.trang_thai = 'hoàng thành'")
+    List<don_hang_entity> Don_thanh_cong_cua_CH_theo_thang(@Param("month")int mont,@Param("year")int year,@Param("store") cuahang_entity store);
+
+
+    @Query("Select dh.store from don_hang_entity dh where dh.ma_don = :ma_don")
+    cuahang_entity lay_ch_tu_don(@Param("ma_don")String ma_don);
+
+    @Query("Select dh.nv from don_hang_entity dh where dh.ma_don = :ma_don")
+    nhanvien_entity lay_nv_tu_don(@Param("ma_don")String ma_don);
+
+    @Query("Select dh from don_hang_entity  dh where  function('MONTH',dh.ngay_hoang_thanh) = :month and" +
+            " function('YEAR',dh.ngay_hoang_thanh) = :year and function('DAY',dh.ngay_hoang_thanh) = :day and "+
+            "dh.nv = :nv")
+    List<don_hang_entity> lay_don_nv_theo_ngay(@Param("day") int day, @Param("month") int month, @Param("year") int year, @Param("nv")nhanvien_entity nv);
+
+}
