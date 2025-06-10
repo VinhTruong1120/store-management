@@ -1,0 +1,63 @@
+<div class="admin-container">
+    <div class="nav-btns">
+        <button onclick="showSection('daily-tasks')" data-section="mission" class="active">Mission </button> </div>
+    <div id="daily-tasks" class="section active">
+        <button class="btn btn-add-item" data-form-id="addMissionForm">➕ Thêm nhiệm vụ</button>
+        
+        <div id="addMissionForm" class="add-form-container">
+            <h3>Thêm nhiệm vụ mới</h3>
+            <button class="btn btn-close-form">✖️ Hủy</button> 
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="missionName">Tên nhiệm vụ</label>
+                    <input type="text" id="missionName" placeholder="Nhập tên nhiệm vụ" class="form-control-custom">
+                </div>
+                <div class="form-group">
+                    <label for="missionAssignee">Người thực hiện</label>
+                    <input type="text" id="missionAssignee" placeholder="Người được giao" class="form-control-custom">
+                </div>
+                <div class="form-group">
+                    <label for="missionDueDate">Ngày đến hạn</label>
+                    <input type="date" id="missionDueDate" class="form-control-custom">
+                </div>
+                <div class="form-group">
+                    <label for="missionPriority">Độ ưu tiên</label>
+                    <select id="missionPriority" class="form-control-custom">
+                        <option value="low">Thấp</option>
+                        <option value="medium">Trung bình</option>
+                        <option value="high">Cao</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-actions">
+                <button class="btn btn-success">➕ Thêm nhiệm vụ</button>
+                <button class="btn btn-secondary btn-close-form">Hủy</button> 
+            </div>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th><th>Tên vai trò</th><th>Quyền hạn</th><th>Số người dùng</th><th>Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td><td>Admin</td><td>Toàn quyền</td><td>1</td>
+                    <td><button class="btn">Chỉnh sửa</button></td>
+                </tr>
+                <tr>
+                    <td>2</td><td>Quản lý cửa hàng</td><td>Quản lý cửa hàng, nhân viên, báo cáo</td><td>3</td>
+                    <td><button class="btn">Chỉnh sửa</button> <button class="btn">Xóa</button></td>
+                </tr>
+                <tr>
+                    <td>3</td><td>Quản lý kho</td><td>Quản lý kho, đơn hàng, nhập xuất</td><td>2</td>
+                    <td><button class="btn">Chỉnh sửa</button> <button class="btn">Xóa</button></td>
+                </tr>
+                <tr>
+                    <td>4</td><td>Thu ngân</td><td>Tạo đơn hàng, thanh toán</td><td>5</td>
+                    <td><button class="btn">Chỉnh sửa</button> <button class="btn">Xóa</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

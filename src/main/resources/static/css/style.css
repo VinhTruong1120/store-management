@@ -1,13 +1,119 @@
+
+
+/* Style bổ sung để đồng bộ với giao diện gốc của manager/mission/store  */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #fff8dc;
+    margin: 20px;
+    font-family: Arial, sans-serif; 
 }
 
+.admin-container {
+    border: 3px solid black;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #fabe00;
+    width: 70%;
+    margin-left: 10%;
+}
+
+h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.nav-btns {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.nav-btns button {
+    flex: 1;
+    background-color: black;
+    color: orange;
+    border: 1px solid black;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease; 
+}
+
+.nav-btns button.active {
+    background-color: #fff8dc; 
+    color: black; /* Màu chữ đen cho nút active */
+}
+
+/* Các style section */
+.section {
+    display: none;
+    background-color: #fabe00; /* Giữ màu nền cho section */
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.section.active {
+    display: block;
+}
+
+/* Styles cho bảng */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fabe00; /* Màu nền bảng theo admin-container */
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: left; /* Căn trái văn bản trong ô bảng */
+}
+
+th {
+    background-color: #fff8dc; /* Màu nền cho tiêu đề bảng */
+}
+
+/* Styles cho nút chung */
+.btn {
+    background-color: black;
+    color: orange;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease; /* Thêm transition */
+    border-radius: 5px; /* Đảm bảo các nút có bo góc */
+}
+
+.btn:hover {
+    background-color: #fff8dc; 
+    color: black; /* Đổi màu chữ khi hover */
+}
+
+.btn:active {
+    background-color: #fff8dc;
+    color: black;
+    border-color: #fff8dc;
+    transform: translateY(1px); 
+}
+
+.btn.blue {
+    background-color: royalblue;
+    color: white;
+    border-radius: 20px;
+}
+
+.btn.rounded {
+    border-radius: 20px;
+}
+
+/* Styles cho sidebar */
 .sidebar {
     width: 260px;
     height: 100vh;
     position: fixed;
-    background-color: gray;   
+    background-color: gray; 
+    display: flex; /* Đảm bảo nó hiển thị đúng */
+    flex-direction: column; /* Sắp xếp các mục theo cột */
+    padding: 15px; /* Thêm padding cho sidebar */
 }
 
 .sidebar h4 {
@@ -33,7 +139,7 @@ body {
     line-height: 36px;
     text-align: center;
     border-radius: 50%;
-    transition: background-color 0.3;
+    transition: background-color 0.3s; /* Thêm transition */
 }
 
 .sidebar .nav-item .nav-link:hover {
@@ -46,6 +152,7 @@ body {
 .sidebar .nav-item .nav-link.active {
     background-color: #ffc107;
     color: black;
+    border-radius: 10px; /* Sửa lại để đồng bộ với hover */
 }
 
 .sidebar .nav-item .nav-link:hover i {
@@ -64,43 +171,55 @@ body {
     font-weight: bold;
 }
 
+/* Styles cho nội dung chính */
 .main-content {
     margin-left: 260px;
     max-width: 1600px;
+    padding: 0 !important; /* Đảm bảo không có padding thừa */
 }
 
-.card-section{
+.card-section {
     display: flex;
     justify-content: center;
+    gap: 20px; /* Thêm khoảng cách giữa các card */
+    margin-top: 20px; /* Thêm margin top để cách xa header */
 }
 
 .card {
     border-radius: 10px;
     overflow: hidden;
     width: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Thêm shadow cho card */
 }
 
 .card-header {
     font-size: 18px;
     font-weight: bold;
+    padding: 10px 15px; /* Thêm padding */
 }
 
 .card-body {
     padding: 20px;
+    color: #eee; /* Màu chữ cho card body */
 }
 
-.main-content .main-header{
+.main-content .main-header {
+    background-color: #343a40; /* Màu nền cho header chính */
     border-radius: 8px;
+    display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
+    padding: 10px 20px; /* Thêm padding cho header */
     margin: 0 auto;
+    color: white; /* Màu chữ mặc định cho header */
 }
 
-.main-content {
-    padding: 0 !important;
+.main-content .main-header h5 {
+    margin: 0;
+    color: #ffc107; /* Màu chữ cho tiêu đề h5 trong header */
 }
 
+/* Styles cho Login Screen */
 #login-screen {
     position: fixed;
     inset: 0;
@@ -109,10 +228,169 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: opacity 0s ease;
+    transition: opacity 0.3s ease; /* Thêm transition */
 }
 
 #login-screen.hidden {
     opacity: 0;
-    pointer-events: none;
+    pointer-events: none; /* Ngăn chặn tương tác khi ẩn */
+}
+
+/* Styles cho form đăng nhập */
+#login-form {
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+#login-form h4 {
+    color: #333;
+}
+
+#login-form .form-control {
+    border-radius: 5px;
+    padding: 10px;
+}
+
+#login-form .btn {
+    padding: 10px;
+    font-size: 1.1em;
+}
+
+#login-status {
+    color: white;
+    margin-top: 15px;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* CSS cho form thêm người dùng (Đã bao gồm từ hướng dẫn trước) */
+.add-form-container {
+    background-color: #ffd700; /* Màu vàng giống ảnh 2 */
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px; /* Khoảng cách với bảng bên dưới */
+    position: relative; /* Để nút đóng có thể được đặt absolute */
+    border: 1px solid #e0b800; /* Viền để nổi bật */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    /* Mặc định ẩn form đi */
+    display: none; 
+}
+
+.add-form-container.active {
+    display: block;
+}
+
+.add-form-container h3 {
+    margin-top: 0;
+    color: #333;
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2 cột */
+    gap: 20px; /* Khoảng cách giữa các ô */
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+.form-control-custom {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box; /* Đảm bảo padding không làm tăng kích thước */
+    background-color: #fff; /* Màu nền trắng cho input */
+    color: #333;
+}
+
+.form-control-custom::placeholder {
+    color: #aaa;
+}
+
+.form-control-custom:focus {
+    border-color: #3c4a5f; /* Màu xanh khi focus */
+    outline: none;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+.form-actions {
+    text-align: right; /* Các nút hành động căn phải */
+    display: flex;
+    justify-content: flex-end; /* Đẩy các nút sang phải */
+    gap: 10px; /* Khoảng cách giữa các nút */
+    margin-top: 20px; /* Khoảng cách từ form-grid */
+}
+
+/* Nút Hủy (Close) ở góc trên bên phải của form */
+.btn-close-form {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #dc3545; /* Màu đỏ */
+    color: white;
+    border: none;
+    border-radius: 50%; /* Nút tròn */
+    width: 30px;
+    height: 30px;
+    font-size: 1.2em;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1; /* Căn giữa ký tự */
+    padding: 0;
+}
+
+.btn-close-form:hover {
+    background-color: #c82333;
+}
+
+/* Các kiểu nút chung (đảm bảo đã có trong style.css) */
+.btn-success {
+    background-color: #28a745;
+    color: white;
+    border-color: #28a745;
+}
+.btn-success:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+    border-color: #6c757d;
+}
+.btn-secondary:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+}
+
+/* Thêm màu cho nút 'Thêm người dùng' ở ngoài bảng */
+.btn-add-user {
+    background-color: black; /* Ví dụ: màu xanh dương */
+    color: white;
+    border-color: black;
+    margin-bottom: 15px; /* Tạo khoảng cách với form hoặc bảng */
+}
+
+.btn-add-user:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+/* Đảm bảo bảng có margin-top để không bị dính vào form */
+#user table {
+    margin-top: 20px;
 }

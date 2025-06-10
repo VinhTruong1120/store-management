@@ -1,0 +1,188 @@
+// content-loader.js
+
+// Hàm showSection này dùng để chuyển đổi giữa các tab nội bộ trong một trang (ví dụ: Người dùng, Phân quyền trong Manager)
+function showSection(id) {
+    // Đảm bảo chỉ tìm kiếm trong #dynamic-content-area
+    document.querySelectorAll('#dynamic-content-area .section').forEach(section => section.classList.remove('active'));
+    document.getElementById(id)?.classList.add('active'); // Sử dụng optional chaining để tránh lỗi nếu id không tồn tại
+
+    document.querySelectorAll('#dynamic-content-area .nav-btns button').forEach(btn => btn.classList.remove('active'));
+    // Tìm nút điều hướng tương ứng với section được kích hoạt và thêm class 'active'
+    const clickedBtn = document.querySelector(`#dynamic-content-area .nav-btns button[data-section="${id}"]`);
+    if (clickedBtn) {
+        clickedBtn.classList.add('active');
+    }
+}
+
+// HÀM CHUNG CHO TẤT CẢ CÁC FORM "THÊM MỚI" (Thêm người dùng, Thêm cửa hàng, Thêm nhiệm vụ)
+function setupAddItemFormLogic() {
+    // Lắng nghe sự kiện click trên tất cả các nút có class 'btn-add-item'
+    const addItemBtns = document.querySelectorAll('.btn-add-item');
+    addItemBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const formId = this.getAttribute('data-form-id'); // Lấy ID của form tương ứng
+            const form = document.getElementById(formId);
+            if (form) {
+                form.style.display = 'block'; // Hiển thị form
+                this.style.display = 'none'; // Ẩn nút 'Thêm mới'
+            }
+        });
+    });
+
+    // Lắng nghe sự kiện click trên tất cả các nút có class 'btn-close-form'
+    const closeFormBtns = document.querySelectorAll('.add-form-container .btn-close-form');
+    closeFormBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const form = this.closest('.add-form-container'); // Tìm form cha gần nhất
+            if (form) {
+                form.style.display = 'none'; // Ẩn form
+                // Tìm lại nút 'Thêm mới' tương ứng và hiển thị nó
+                const addItemBtn = document.querySelector(`.btn-add-item[data-form-id="${form.id}"]`);
+                if (addItemBtn) {
+                    addItemBtn.style.display = 'inline-block';
+                }
+            }
+        });
+    });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const dynamicContentArea = document.getElementById('dynamic-content-area');
+    const mainTitle = document.getElementById('main-title'); // Lấy element tiêu đề chính
+
+    async function loadPage(pageName, url, title) {
+        try {
+            const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const html = await response.text();
+
+            dynamicContentArea.innerHTML = html; // Chèn nội dung vào dynamic-content-area
+            mainTitle.innerHTML = `<i class="fa-solid fa-shop"></i> ${title}`; // Cập nhật tiêu đề
+
+            // Cập nhật trạng thái active của sidebar
+            document.querySelectorAll('#sidebar-menu .nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            const activeLink = document.querySelector(`.nav-link[data-page="${pageName}"]`);
+            if (activeLink) {
+                activeLink.classList.add('active');
+            } else {
+                // Xử lý trường hợp Home submenu link không có data-page (nếu cần)
+                // Ví dụ: nếu pageName là 'manager' nhưng link sidebar là link con của Home
+                const homeSubmenuLink = document.querySelector(`.nav-home a[data-bs-toggle="collapse"]`);
+                if (homeSubmenuLink) {
+                    homeSubmenuLink.classList.add('active');
+                    // Mở submenu nếu nó đang đóng
+                    const homeSubmenu = document.getElementById('homeSubmenu');
+                    if (homeSubmenu && !homeSubmenu.classList.contains('show')) {
+                        new bootstrap.Collapse(homeSubmenu, { toggle: true });
+                    }
+                }
+            }
+
+            // Gọi hàm thiết lập form chung cho TẤT CẢ các trang có form thêm mới
+            setupAddItemFormLogic(); 
+
+            // Logic để kích hoạt tab con mặc định cho từng trang
+            if (pageName === 'manager') {
+                showSection('user'); // Kích hoạt tab 'Người dùng' mặc định cho Manager
+            } else if (pageName === 'store') {
+                showSection('store-overview'); // Kích hoạt tab 'Tổng quan cửa hàng' mặc định cho Store
+            } else if (pageName === 'mission') {
+                showSection('daily-tasks'); // Kích hoạt tab 'Nhiệm vụ hàng ngày' mặc định cho Mission
+            }
+            
+            // Chạy các script nhúng trong nội dung được tải (nếu có)
+            const scripts = dynamicContentArea.querySelectorAll('script');
+            scripts.forEach(script => {
+                const newScript = document.createElement('script');
+                if (script.src) {
+                    newScript.src = script.src;
+                } else {
+                    newScript.textContent = script.textContent;
+                }
+                dynamicContentArea.appendChild(newScript);
+            });
+
+
+        } catch (error) {
+            console.error(`Lỗi khi tải trang ${pageName}:`, error);
+            dynamicContentArea.innerHTML = `<p class="text-danger">Không thể tải nội dung cho ${title}. Vui lòng kiểm tra đường dẫn file hoặc lỗi server.</p>`;
+        }
+    }
+
+    // Hàm tải nội dung trang chủ (dashboard)
+    function loadHomePage() {
+        const homeContent = `
+            <div class="card-section row mt-4">
+                <div class="card-total-sale col-md-4">
+                    <div class="card text-center border-0 shadow">
+                        <div class="card-header bg-warning text-dark">
+                            <i class="fa-solid fa-dollar-sign"></i> Doanh thu
+                        </div>
+                        <div class="card-body bg-dark text-light">
+                            <p>Hôm nay: 9.000.000</p>
+                            <p class="text-secondary">Hôm qua: 14.500.000</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-orders col-md-4">
+                    <div class="card text-center border-0 shadow">
+                        <div class="card-header bg-primary text-light">
+                            <i class="fa-solid fa-file-invoice"></i> Đơn hàng
+                        </div>
+                        <div class="card-body bg-dark text-light">
+                            <p>Hôm nay: 103</p>
+                            <p class="text-secondary">Hôm qua: 198</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        dynamicContentArea.innerHTML = homeContent;
+        mainTitle.innerHTML = `<i class="fa-solid fa-shop"></i> Home`;
+
+        // Cập nhật trạng thái active của sidebar cho Home
+        document.querySelectorAll('#sidebar-menu .nav-link').forEach(link => {
+            link.classList.remove('active');
+        });
+        document.querySelector('.nav-home > .nav-link').classList.add('active');
+    }
+
+    // Gắn sự kiện click cho các liên kết sidebar
+    document.querySelectorAll('#sidebar-menu .nav-link[data-page]').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault(); 
+            const pageName = this.getAttribute('data-page');
+            const href = this.getAttribute('href');
+            const title = this.innerText.trim();
+            if (pageName && href) {
+                loadPage(pageName, href, title);
+            }
+        });
+    });
+
+    // Xử lý click vào nút Home chính (nếu collapse đang mở thì tải dashboard, nếu đóng thì bootstrap tự mở)
+    document.querySelector('.nav-home > .nav-link').addEventListener('click', function(e) {
+        // Kiểm tra xem sự kiện click này có phải là do collapse đang mở/đóng không
+        const homeSubmenu = document.getElementById('homeSubmenu');
+        const isExpanded = homeSubmenu.classList.contains('show');
+        
+        // Nếu collapse đang mở và người dùng click vào Home lần nữa, tải dashboard
+        if (isExpanded) {
+            loadHomePage();
+        } 
+        // Bootstrap sẽ tự xử lý việc mở/đóng collapse. 
+        // Nếu collapse đang đóng, click lần đầu sẽ mở collapse và không tải dashboard.
+        
+        document.querySelectorAll('#sidebar-menu .nav-link').forEach(link => {
+            link.classList.remove('active');
+        });
+        this.classList.add('active'); 
+    });
+
+    // Tải trang chủ mặc định khi DOM đã tải xong
+    loadHomePage();
+});

@@ -10,7 +10,7 @@ document.getElementById("login-form").addEventListener("submit", function (e) {
     const passwordInput = document.getElementById("password").value;
     const status = document.getElementById("login-status");
 
-    fetch("../data/user.json")
+    fetch("./data/user.json")
         .then(response => {
             if (!response.ok) throw new Error("Cannot load user.json");
             return response.json();

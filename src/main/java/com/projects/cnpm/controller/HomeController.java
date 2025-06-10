@@ -38,5 +38,16 @@ public class HomeController {
         return "staff";
     }
 
-
+    @GetMapping("/manager.html")
+    public String manager() {
+        return "manager";
+    }
+    @GetMapping("/store.html")
+    public String store() {
+        return "store";
+    }
+    @GetMapping("/mission.html")
+    public String mission() {
+        return "mission";
+    }
 }
