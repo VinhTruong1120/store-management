@@ -50,4 +50,8 @@ public class cua_hang_Service extends BaseSerive<cuahang_entity,String,cuahang_r
      public nhanvien_entity nv_manager_cua_ch(String store_id){
         return repositoty.lay_nv_manager(store_id);
      }
+
+     public List<cuahang_entity> Lay_all_cua_hang(){
+        return repositoty.findAll();
+     }
 }

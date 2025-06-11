@@ -3,66 +3,165 @@
         <button onclick="showSection('user')" data-section="user" class="active">Manager </button>
     </div>
     <div id="user" class="section active">
-        <button class="btn btn-add-user btn-add-item" data-form-id="addUserForm">👥 Thêm người dùng</button> <div id="addUserForm" class="add-form-container">
+        <button class="btn btn-add-user btn-add-item" data-form-id="addUserForm">👥 Thêm người dùng</button>
+        <div id="addUserForm" class="add-form-container">
             <h3>Thêm người dùng mới</h3>
-            <button class="btn btn-close-form">✖️ Hủy</button> 
-            <div class="form-grid">
-                <div class="form-group">
-                    <label for="fullName">Họ và tên</label>
-                    <input type="text" id="fullName" placeholder="Nhập họ và tên" class="form-control-custom">
+            <button class="btn btn-close-form">✖️ Hủy</button>
+            <form action="">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="fullName">Họ và tên</label>
+                        <input type="text" id="fullName" placeholder="Nhập họ và tên" class="form-control-custom">
+                    </div>
+                    <div class="form-group">
+                        <label for="roleSelect">Vai trò</label>
+                        <select id="roleSelect" class="form-control-custom">
+                            <option value="">Chọn vai trò</option>
+                            <option value="ADMIN">ADMIN</option>
+                            <option value="warehouse">Quản lý kho</option>
+                            <option value="cashier">Thu ngân</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="storeSelect">Cửa hàng</label>
+                        <select id="storeSelect" class="form-control-custom">
+                            <option value="">Chọn cửa hàng</option>
+                            <option value="all">Tất cả</option>
+                            <option value="branch1">Chi nhánh Trung tâm</option>
+                            <option value="STORE003">Cửa hàng Bánh ngọt</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="usernames">Tên đăng nhập</label>
+                        <input type="text" id="usernames" placeholder="Nhập tên đăng nhập" class="form-control-custom">
+                    </div>
+                    <div class="form-group">
+                        <label for="passwords">Mật Khẩu</label>
+                        <input type="password" id="passwords" placeholder="Nhập Mật khẩu" class="form-control-custom">
+                    </div>
+                    <div class="form-group">
+                        <label for="NS">Ngày sinh</label>
+                        <input type="date" id="NS" placeholder="Ngày sinh" class="form-control-custom">
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="roleSelect">Vai trò</label>
-                    <select id="roleSelect" class="form-control-custom">
-                        <option value="">Chọn vai trò</option>
-                        <option value="manager">Quản lý cửa hàng</option>
-                        <option value="warehouse">Quản lý kho</option>
-                        <option value="cashier">Thu ngân</option>
-                    </select>
+                <div class="form-actions">
+                    <button class="btn btn-success" id="Them" type="button">➕ Thêm người dùng</button>
+                    <button class="btn btn-secondary btn-close-form" type="button">Hủy</button>
                 </div>
-                <div class="form-group">
-                    <label for="storeSelect">Cửa hàng</label>
-                    <select id="storeSelect" class="form-control-custom">
-                        <option value="">Chọn cửa hàng</option>
-                        <option value="all">Tất cả</option>
-                        <option value="branch1">Chi nhánh Trung tâm</option>
-                        <option value="branch2">Chi nhánh Quận 2</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="username">Tên đăng nhập</label>
-                    <input type="text" id="username" placeholder="Nhập tên đăng nhập" class="form-control-custom">
-                </div>
-                <div class="form-group">
-                    <label for="passwords">Mật Khẩu</label>
-                    <input type="password" id="passwords" placeholder="Nhập Mật khẩu" class="form-control-custom">
-                </div>
-            </div>
-            <div class="form-actions">
-                <button class="btn btn-success">➕ Thêm người dùng</button>
-                <button class="btn btn-secondary btn-close-form">Hủy</button> 
-            </div>
+            </form>
         </div>
         <table>
             <thead>
                 <tr>
-                    <th>ID</th><th>Tên người dùng</th><th>Vai trò</th><th>Cửa hàng</th><th>Thao tác</th>
+                    <th>ID</th>
+                    <th>Tên người dùng</th>
+                    <th>Vai trò</th>
+                    <th>Cửa hàng</th>
+                    <th>Thao tác</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>AD</td><td>Nguyễn Văn A</td><td>Admin</td><td>Tất cả</td>
-                    <td><button class="btn">Chỉnh sửa</button> <button class="btn">Vô hiệu</button></td>
-                </tr>
-                <tr>
-                    <td>QL</td><td>Trần Thị B</td><td>Quản lý cửa hàng</td><td>Chi nhánh Trung tâm</td>
-                    <td><button class="btn">Chỉnh sửa</button> <button class="btn">Vô hiệu</button></td>
-                </tr>
-                <tr>
-                    <td>QLK</td><td>Lê Văn C</td><td>Quản lý kho</td><td>Kho Trung tâm</td>
-                    <td><button class="btn">Chỉnh sửa</button> <button class="btn">Vô hiệu</button></td>
-                </tr>
+            <tbody id="staff-body">
+
             </tbody>
         </table>
     </div>
 </div>
+
+<script>
+    let user = [];
+
+    async function fetchAllUsers() {
+        try {
+            const res = await fetch("http://localhost:8080/api/admin/all_NV");
+            if (!res.ok) throw new Error("Lỗi server");
+            user = await res.json();
+            renderUserTable(user);
+        } catch (err) {
+            console.error("Lỗi tải danh sách nhân viên:", err);
+            document.getElementById('staff-body').innerHTML = `
+        <tr><td colspan="5" class="text-danger">Không thể tải dữ liệu nhân viên</td></tr>
+      `;
+        }
+    }
+
+    function renderUserTable(data) {
+        const tbody = document.getElementById("staff-body");
+        tbody.innerHTML = data.map(u => `
+      <tr>
+        <td>${u.id}</td>
+        <td>${u.name}</td>
+        <td>${u.roles.map(r => `<span>${r.role_name}</span>`).join(", ")}</td>
+        <td>${u.store?.name || "Không rõ"}</td>
+        <td>
+          <button class="btn btn-sm btn-primary">Chỉnh sửa</button>
+          <button class="btn btn-sm btn-danger">Vô hiệu</button>
+        </td>
+      </tr>
+    `).join("");
+    }
+
+
+    document.addEventListener("DOMContentLoaded", fetchAllUsers);
+    function generateMaNV() {
+        const prefix = "NV";
+        const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        let result = prefix;
+        for (let i = 0; i < 8; i++) {
+            result += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        return result;
+    }
+    document.getElementById("Them").addEventListener("click", function () {
+        const roleSelect = document.getElementById("roleSelect")
+        const data = {
+            ma_nv: generateMaNV(),
+            ten: document.getElementById("fullName").value,
+            username: document.getElementById("usernames").value,
+            passwords: document.getElementById("passwords").value,
+            dia_chi: "",
+
+            luong: 0,
+            birthday: document.getElementById("NS").value,
+            lien_he: [
+                ""
+            ],
+            IDCH: document.getElementById("storeSelect").value,
+            roles: [
+                {
+                    role_id: roleSelect.value,
+                    role_name: roleSelect.options[roleSelect.selectedIndex].text
+                },
+            ]
+        };
+        console.log(data)
+        fetch("http://localhost:8080/api/admin/tao_nhan_vien", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        }).then(response => response.text())
+            .then(result => {
+                alert(result);
+                appendUserToTable(data)
+            })
+            .catch(error => {
+                alert(error);
+            })
+    })
+    function appendUserToTable(user) {
+        const tbody = document.querySelector("table tbody");
+        const row = document.createElement("tr");
+        row.innerHTML = `
+        <td>${user.id || user.ma_nv}</td>
+        <td>${user.ten}</td>
+        <td>${user.roles.map(r => `<span>${r.role_name}</span>`).join(", ")}</td>
+        <td>${user.IDCH || "Không rõ"}</td>
+        <td>
+            <button class="btn btn-sm btn-primary">Chỉnh sửa</button>
+            <button class="btn btn-sm btn-danger">Vô hiệu</button>
+        </td>
+    `;
+        tbody.appendChild(row);
+    }
+</script>

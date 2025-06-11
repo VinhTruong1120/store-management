@@ -67,14 +67,6 @@ public class Chuc_nang_manager extends Chuc_nang_ADMIN_Controller{
         return new ResponseEntity<> ("Không tìm thấy thông tin",HttpStatus.NOT_FOUND);
     }
 
-
-    @PostMapping("/tong_sl_don_cua_nv")
-    public ResponseEntity<?> tong_don_nv(@RequestBody String ma_nv) {
-        
-        
-        return new ResponseEntity<>("Không tìm thấy thông tin",HttpStatus.NOT_FOUND);
-    }
     
-
     
 }

@@ -19,7 +19,7 @@ function setupAddItemFormLogic() {
     // Lắng nghe sự kiện click trên tất cả các nút có class 'btn-add-item'
     const addItemBtns = document.querySelectorAll('.btn-add-item');
     addItemBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
+        btn.addEventListener('click', function () {
             const formId = this.getAttribute('data-form-id'); // Lấy ID của form tương ứng
             const form = document.getElementById(formId);
             if (form) {
@@ -32,7 +32,7 @@ function setupAddItemFormLogic() {
     // Lắng nghe sự kiện click trên tất cả các nút có class 'btn-close-form'
     const closeFormBtns = document.querySelectorAll('.add-form-container .btn-close-form');
     closeFormBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
+        btn.addEventListener('click', function () {
             const form = this.closest('.add-form-container'); // Tìm form cha gần nhất
             if (form) {
                 form.style.display = 'none'; // Ẩn form
@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // Gọi hàm thiết lập form chung cho TẤT CẢ các trang có form thêm mới
-            setupAddItemFormLogic(); 
+            setupAddItemFormLogic();
 
             // Logic để kích hoạt tab con mặc định cho từng trang
             if (pageName === 'manager') {
@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
             } else if (pageName === 'mission') {
                 showSection('daily-tasks'); // Kích hoạt tab 'Nhiệm vụ hàng ngày' mặc định cho Mission
             }
-            
+
             // Chạy các script nhúng trong nội dung được tải (nếu có)
             const scripts = dynamicContentArea.querySelectorAll('script');
             scripts.forEach(script => {
@@ -153,8 +153,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Gắn sự kiện click cho các liên kết sidebar
     document.querySelectorAll('#sidebar-menu .nav-link[data-page]').forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault(); 
+        link.addEventListener('click', function (e) {
+            e.preventDefault();
             const pageName = this.getAttribute('data-page');
             const href = this.getAttribute('href');
             const title = this.innerText.trim();
@@ -165,24 +165,25 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Xử lý click vào nút Home chính (nếu collapse đang mở thì tải dashboard, nếu đóng thì bootstrap tự mở)
-    document.querySelector('.nav-home > .nav-link').addEventListener('click', function(e) {
+    document.querySelector('.nav-home > .nav-link').addEventListener('click', function (e) {
         // Kiểm tra xem sự kiện click này có phải là do collapse đang mở/đóng không
         const homeSubmenu = document.getElementById('homeSubmenu');
         const isExpanded = homeSubmenu.classList.contains('show');
-        
+
         // Nếu collapse đang mở và người dùng click vào Home lần nữa, tải dashboard
         if (isExpanded) {
             loadHomePage();
-        } 
+        }
         // Bootstrap sẽ tự xử lý việc mở/đóng collapse. 
         // Nếu collapse đang đóng, click lần đầu sẽ mở collapse và không tải dashboard.
-        
+
         document.querySelectorAll('#sidebar-menu .nav-link').forEach(link => {
             link.classList.remove('active');
         });
-        this.classList.add('active'); 
+        this.classList.add('active');
     });
 
     // Tải trang chủ mặc định khi DOM đã tải xong
     loadHomePage();
 });
+
