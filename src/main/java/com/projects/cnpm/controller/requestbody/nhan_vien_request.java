@@ -22,7 +22,7 @@ public class nhan_vien_request {
 
     private long luong;
 
-    private Timestamp birthday;
+    
 
 
     private List<String> lien_he = new ArrayList<>();
@@ -85,16 +85,6 @@ public class nhan_vien_request {
 
     public void setLuong(long luong) {
         this.luong = luong;
-    }
-
-
-    public Timestamp getBirthday() {
-        return birthday;
-    }
-
-
-    public void setBirthday(Timestamp birthday) {
-        this.birthday = birthday;
     }
 
 

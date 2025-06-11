@@ -14,10 +14,10 @@ import com.projects.cnpm.Repository.nhanvien_repository;
 import com.projects.cnpm.controller.requestbody.nhan_vien_request;
 
 import jakarta.transaction.Transactional;
+import jakarta.validation.constraints.Null;
 
 @Service
 public class nhanvien_service extends BaseSerive<nhanvien_entity,String,nhanvien_repository> {
-   
 
     @Autowired
     public void setRepository(nhanvien_repository repository){
@@ -88,13 +88,27 @@ public class nhanvien_service extends BaseSerive<nhanvien_entity,String,nhanvien
             nv.setLien_he(TT_moi.getLien_he());
             nv.setTen(TT_moi.getTen());
             nv.setDia_chi(TT_moi.getDia_chi());
-            nv.setBirthday(TT_moi.getBirthday());
             nv.setUsername(TT_moi.getUsername());
             nv.setPasswords(TT_moi.getPasswords());
             nv.setLuong(TT_moi.getLuong());
             repositoty.save(nv);
             return 1;
         }
+    }
+
+    @Transactional
+    public int xoa_nv(String id){
+        System.out.println(id);
+        Optional<nhanvien_entity> nv = repositoty.findById(id);
+        if(!nv.isPresent()){
+            return 0;
+        }
+        nhanvien_entity Del_NV = nv.get();
+        Del_NV.getRoles().clear();
+        Del_NV.setStore(null);
+        repositoty.save(Del_NV);
+        repositoty.deleteById(id);;
+        return 1;
     }
 }
 

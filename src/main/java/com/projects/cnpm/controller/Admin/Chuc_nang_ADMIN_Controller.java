@@ -72,6 +72,14 @@ public class Chuc_nang_ADMIN_Controller {
         return ResponseEntity.ok(ls_role);
     }
     
+    @DeleteMapping("/xoa_nv")
+    public ResponseEntity<?> xoa_nv(@RequestParam String id){
+        System.out.println("mã nhân viên: " +id);
+        if (Nhan_vien_service.xoa_nv(id ) == 0) {
+            return  new ResponseEntity<>("Xoá thất bại",HttpStatus.NOT_FOUND);
+        }
+        return  ResponseEntity.ok("Xoá thành công");
+    }
 
     @GetMapping("/all_CH")
     public ResponseEntity<?> lay_all_CH() {
@@ -102,7 +110,7 @@ public class Chuc_nang_ADMIN_Controller {
             // lấy tên cửa hàng (có thể kiểm tra null nếu cần)
             String tenCuaHang = nv.getStore() != null ? nv.getStore().getTen_cua_hang() : null;
 
-            return new NV_DTO(id, name, roles, tenCuaHang);
+            return new NV_DTO(id, name,nv.getUsername(),nv.getPasswords(), roles, tenCuaHang);
         }).toList();
         return ResponseEntity.ok(all_NV_dto);
     }
