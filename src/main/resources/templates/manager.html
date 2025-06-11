@@ -17,9 +17,7 @@
                         <label for="roleSelect">Vai trò</label>
                         <select id="roleSelect" class="form-control-custom">
                             <option value="">Chọn vai trò</option>
-                            <option value="ADMIN">ADMIN</option>
-                            <option value="warehouse">Quản lý kho</option>
-                            <option value="cashier">Thu ngân</option>
+
                         </select>
                     </div>
                     <div class="form-group">
@@ -101,7 +99,8 @@
     }
 
 
-    document.addEventListener("DOMContentLoaded", fetchAllUsers());
+    document.addEventListener("DOMContentLoaded", fetchAllUsers(), fetchRoles(),fetchStore());
+
     function generateMaNV() {
         const prefix = "NV";
         const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -164,4 +163,44 @@
     `;
         tbody.appendChild(row);
     }
+    async function fetchRoles() {
+        try {
+            const ls_role = document.getElementById("roleSelect");
+            const res = await fetch("http://localhost:8080/api/admin/all_role");
+            if (!res.ok) throw new Error("Không load được role");
+
+            const roles_data = await res.json();
+            
+
+            ls_role.innerHTML = `<option value="">Chọn vai trò</option>` +
+                roles_data.map(item => `
+                <option value="${item.role_id}">${item.role_name}</option>
+            `).join("");
+
+        } catch (error) {
+            console.error("Lỗi load role:", error);
+            alert("Lỗi: " + error.message);
+        }
+    }
+
+    async function fetchStore() {
+        try {
+            const ls_Store = document.getElementById("storeSelect");
+            const res = await fetch("http://localhost:8080/api/admin/all_CH");
+            if (!res.ok) throw new Error("Không load được cửa hàng");
+
+            const Stores_data = await res.json();
+            
+
+            ls_Store.innerHTML = `<option value="">Chọn vai trò</option>` +
+                Stores_data.map(item => `
+                <option value="${item.store_id}">${item.ten_cua_hang}</option>
+            `).join("");
+
+        } catch (error) {
+            console.error("Lỗi load role:", error);
+            alert("Lỗi: " + error.message);
+        }
+    }
+
 </script>

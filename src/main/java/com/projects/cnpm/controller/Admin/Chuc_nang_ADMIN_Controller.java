@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
+import com.projects.cnpm.controller.DTO.ALL_role_DTO;
 import com.projects.cnpm.controller.DTO.CH_DTO;
 import com.projects.cnpm.controller.DTO.NV_DTO;
 import com.projects.cnpm.controller.DTO.Role_DTO;
@@ -60,6 +61,17 @@ public class Chuc_nang_ADMIN_Controller {
     private don_hang_service Don_hang_service;
     @Autowired
     private chi_tiet_DH_service Chi_tiet_DH_service;
+
+    @GetMapping("/all_role")
+    public ResponseEntity<?> all_role() {
+        List<role_entity> all_role = Role_service.FindAll();
+        if(all_role.isEmpty()){
+            return new ResponseEntity<>("Không có role nào tồn tịa",HttpStatus.NOT_FOUND);
+        }
+        List<ALL_role_DTO> ls_role = all_role.stream().map(role -> new ALL_role_DTO(role.getRole_id(),role.getTen_role())).toList();
+        return ResponseEntity.ok(ls_role);
+    }
+    
 
     @GetMapping("/all_CH")
     public ResponseEntity<?> lay_all_CH() {
