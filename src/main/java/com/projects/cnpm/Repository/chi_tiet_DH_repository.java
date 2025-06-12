@@ -30,7 +30,16 @@ public interface chi_tiet_DH_repository extends JpaRepository<chi_tiet_DH_entity
        "FROM chi_tiet_DH_entity ctdh " +
        "WHERE ctdh.id.don_hang.ngay_nhan BETWEEN :ngay_BD AND :ngay_KT " +
        "GROUP BY ctdh.id.don_hang.ngay_nhan")
-List<doanh_thu_x_y_DTO> doanhThuTheoNgay(@Param("ngay_BD") Timestamp ngayBD,
+        List<doanh_thu_x_y_DTO> doanhThuTheoNgay(@Param("ngay_BD") Timestamp ngayBD,
                                            @Param("ngay_KT") Timestamp ngayKT);
+
+        @Query("SELECT new com.projects.cnpm.controller.DTO.doanh_thu_x_y_DTO(" +
+       "ctdh.id.don_hang.ngay_nhan, " +
+       "SUM(ctdh.so_luong * ctdh.id.san_pham.don_gia)) "  +
+        "FROM chi_tiet_DH_entity ctdh " +
+        "GROUP BY ctdh.id.don_hang.ma_don")
+        List <doanh_thu_x_y_DTO> thanh_tien_theo_don_hoang_thanh1();
+
+
 
 }

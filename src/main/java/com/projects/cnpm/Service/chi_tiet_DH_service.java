@@ -44,4 +44,8 @@ public class chi_tiet_DH_service extends BaseSerive<chi_tiet_DH_entity, CTDH_ID,
     public List<doanh_thu_x_y_DTO> doanh_thu_x_den_y(Timestamp start, Timestamp end) {
        return repositoty.doanhThuTheoNgay(start,end);
     }
+
+    public List<doanh_thu_x_y_DTO> doanh_thu_xx_den_yy() {
+       return repositoty.thanh_tien_theo_don_hoang_thanh1();
+    }
 }

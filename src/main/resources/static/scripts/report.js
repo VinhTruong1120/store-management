@@ -1,35 +1,35 @@
-let rawData = []; // để lưu toàn bộ dữ liệu JSON
-
-// Tải dữ liệu JSON trước
-fetch('./data/test.json')
-  .then(res => res.json())
-  .then(data => {
-    rawData = data; // lưu lại để dùng khi lọc
-  })
-  .catch(err => {
-    console.error("Lỗi khi đọc JSON:", err);
-  });
-
 document.addEventListener("DOMContentLoaded", () => {
-  let rawData = [];
 
-  // Đọc dữ liệu JSON trước
-  fetch('./data/random_revenue_data.json')
-    .then(res => res.json())
-    .then(data => {
-      rawData = data;
-    });
+  
 
   document.getElementById('filterDate').addEventListener('click', () => {
-    const from = new Date(document.getElementById('fromDate').value);
-    const to = new Date(document.getElementById('toDate').value);
-    to.setHours(23, 59, 59); // Đảm bảo tính hết cả ngày cuối cùng
+    const from = document.getElementById('fromDate').value;
+    const to = document.getElementById('toDate').value;
+    const fromValue = new Date(from);
+    const toValue = new Date(to);
+    toValue.setHours(23, 59, 59); // Đảm bảo tính hết cả ngày cuối cùng
 
-    const totalPerDay = {};
 
-    rawData.forEach(row => {
+    const data = {
+        ngay_bat_dau: from,
+        ngay_kt: to
+    }
+
+    fetch('http://localhost:8080/api/admin/doanh_thu_x_den_y', {
+    method: 'POST',
+    headers: {
+        'Content-Type':'application/json'
+    },
+    body: JSON.stringify(data)
+    })
+    .then(res => res.json())
+    .then(responseData => {
+        console.log()
+        const totalPerDay = {};
+
+    responseData.forEach(row => {
       const time = new Date(row.ngayNhan);
-      if (time >= from && time <= to) {
+      if (time >= fromValue && time <= toValue) {
         const dateKey = time.toISOString().split('T')[0]; // yyyy-mm-dd
         if (!totalPerDay[dateKey]) totalPerDay[dateKey] = 0;
         totalPerDay[dateKey] += row.tongTien;
@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
         plugins: {
           title: {
             display: true,
-            text: `Tổng doanh thu từ ${from.toLocaleDateString()} đến ${to.toLocaleDateString()}: ${totalRevenue.toLocaleString()} VNĐ`
+            text: `Tổng doanh thu từ ${fromValue.toLocaleDateString()} đến ${toValue.toLocaleDateString()}: ${totalRevenue.toLocaleString()} VNĐ`
           },
           tooltip: {
             callbacks: {
@@ -99,6 +99,13 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       }
     });
+    })
+.catch(err => {
+    console.error("lỗi khi gửi request: ",err);
+}) ;   
+
+
+    
   });
 });
 
