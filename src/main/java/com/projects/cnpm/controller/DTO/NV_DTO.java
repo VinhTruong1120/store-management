@@ -2,8 +2,7 @@ package com.projects.cnpm.controller.DTO;
 
 import java.util.List;
 
-import com.projects.cnpm.DAO.Entity.cuahang_entity;
-import com.projects.cnpm.DAO.Entity.role_entity;
+
 
 public class NV_DTO {
     private String id;

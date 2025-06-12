@@ -2,12 +2,12 @@
     <div class="nav-btns">
         <button onclick="showSection('store-overview')" data-section="store" class="active">Store </button>
     </div>
-    <div id="store-overview" class="section active"> 
-        <button class="btn btn-add-item" data-form-id="addStoreForm">➕ Thêm cửa hàng</button> 
+    <div id="store-overview" class="section active">
+        <button class="btn btn-add-item" data-form-id="addStoreForm">➕ Thêm cửa hàng</button>
 
         <div id="addStoreForm" class="add-form-container" style="display: none;">
             <h3>Thêm cửa hàng mới</h3>
-            <button class="btn btn-close-form">✖️ Hủy</button> 
+            <button class="btn btn-close-form">✖️ Hủy</button>
             <div class="form-grid">
                 <div class="form-group">
                     <label for="storeName">Tên cửa hàng</label>
@@ -25,35 +25,43 @@
                     <label for="storeManager">Quản lý</label>
                     <select id="storeManager" class="form-control-custom">
                         <option value="">Chọn quản lý</option>
-                        <option value="managerA">Quản lý A</option>
-                        <option value="managerB">Quản lý B</option>
                     </select>
                 </div>
             </div>
             <div class="form-actions">
-                <button class="btn btn-success">➕ Thêm cửa hàng</button>
-                <button class="btn btn-secondary btn-close-form">Hủy</button> 
+                <button class="btn btn-success" id="Them">➕ Thêm cửa hàng</button>
+                <button class="btn btn-secondary btn-close-form">Hủy</button>
             </div>
         </div>
         <table>
             <thead>
                 <tr>
-                    <th>ID</th><th>Tên cửa hàng</th><th>Địa chỉ</th><th>Trạng thái</th><th>Thao tác</th>
+                    <th>ID</th>
+                    <th>Tên cửa hàng</th>
+                    <th>Địa chỉ</th>
+                    <th>Trạng thái</th>
+                    <th>Thao tác</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="store-body">
                 <tr>
-                    <td>1</td><td>Chi nhánh Trung tâm</td><td>123 Đường Lê Lợi, Q.1, TP.HCM</td>
+                    <td>1</td>
+                    <td>Chi nhánh Trung tâm</td>
+                    <td>123 Đường Lê Lợi, Q.1, TP.HCM</td>
                     <td><button class="btn blue">Hoạt động</button></td>
                     <td><button class="btn">Chỉnh sửa</button> <button class="btn">Tạm ngưng</button></td>
                 </tr>
                 <tr>
-                    <td>2</td><td>Chi nhánh Quận 2</td><td>456 Đường Thảo Điền, Q.2, TP.HCM</td>
+                    <td>2</td>
+                    <td>Chi nhánh Quận 2</td>
+                    <td>456 Đường Thảo Điền, Q.2, TP.HCM</td>
                     <td><button class="btn blue">Hoạt động</button></td>
                     <td><button class="btn">Chỉnh sửa</button> <button class="btn">Tạm ngưng</button></td>
                 </tr>
                 <tr>
-                    <td>3</td><td>Chi nhánh Quận 3</td><td>789 Đường Võ Văn Tần, Q.3, TP.HCM</td>
+                    <td>3</td>
+                    <td>Chi nhánh Quận 3</td>
+                    <td>789 Đường Võ Văn Tần, Q.3, TP.HCM</td>
                     <td><button class="btn rounded">Tạm ngưng</button></td>
                     <td><button class="btn">Chỉnh sửa</button> <button class="btn">Kích hoạt</button></td>
                 </tr>
@@ -61,3 +69,154 @@
         </table>
     </div>
 </div>
+
+<script>
+    store = []
+    async function fetchAllUsers() {
+        const ls_role = document.getElementById("storeManager");
+        const res = await fetch("http://localhost:8080/api/admin/all_NV");
+        if (!res.ok) throw new Error("Không load được role");
+
+        const roles_data = await res.json();
+
+
+        ls_role.innerHTML = `<option value="">Chọn vai trò</option>` +
+            roles_data.map(item => `
+                <option value="${item.id}">${item.name}</option>
+            `).join("");
+    }
+    async function fetchStore() {
+        try {
+            const ls_Store = document.getElementById("store-body");
+            const res = await fetch("http://localhost:8080/api/admin/all_CH");
+            if (!res.ok) throw new Error("Không load được cửa hàng");
+
+            store = await res.json();
+
+            renderStoreTable(store);
+        } catch (error) {
+            console.error("Lỗi load role:", error);
+            alert("Lỗi: " + error.message);
+        }
+    }
+    document.addEventListener("DOMContentLoaded", fetchAllUsers(), fetchStore())
+
+    function generateStoreID() {
+        const prefix = "Store";
+        const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        let result = prefix;
+        for (let i = 0; i < 2; i++) {
+            result += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        return result;
+    }
+
+    function renderStoreTable(data) {
+        const tbody = document.getElementById("store-body");
+        tbody.innerHTML = data.map(u => `
+      <tr>
+        <td>${u.store_id}</td>
+        <td><input type="text" value="${u.ten_cua_hang}" style="border: 0px;background: none;"></td>
+        <td><input type="text" value="${u.dia_chi}" style="border: 0px;background: none;"></td>
+        <td><button class="btn blue">Hoạt động</button></td>
+        <td>
+            <button class="btn" onclick = "logRowData(this, '${u.store_id}')">Chỉnh sửa</button> 
+            <button class="btn" onclick= "deleteStore('${u.store_id}')">Xoá</button>
+        </td>
+    </tr>
+    `).join("");
+    }
+
+    document.getElementById("Them").addEventListener("click", function () {
+        const roleSelect = document.getElementById("roleSelect")
+        const data = {
+            store_id: generateStoreID(),
+            ten_ch: document.getElementById("storeName").value,
+            dia_chi: document.getElementById("storeAddress").value,
+            contact: [
+                document.getElementById("storePhone").value,
+            ],
+
+        };
+        console.log(data)
+        fetch("http://localhost:8080/api/admin/tao_cua_hang_moi", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        }).then(response => response.text())
+            .then(result => {
+                alert(result);
+                store.push({
+                    store_id: data.store_id,
+                    ten_cua_hang: data.ten_ch,
+                    dia_chi: data.dia_chi,
+                });
+                renderStoreTable(store);
+            })
+            .catch(error => {
+                alert(error);
+            })
+    })
+
+    function logRowData(button, ids) {
+        if (!confirm("Bạn có chắc chắn muốn cập nhật nhân viên này?")) return;
+        const row = button.closest("tr");
+        const [ ten_cua_hangInput, dia_chiInput] = row.querySelectorAll("input");
+
+        const data = {
+            id: ids,
+            store_name: ten_cua_hangInput.value,
+            address: dia_chiInput.value
+            
+        };
+        fetch("http://localhost:8080/api/admin/chinh_sua_store", {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Cập nhật thất bại");
+                }
+                fetchStore();
+                return response.text();
+            })
+            .then(result => {
+                alert(result); // hoặc hiển thị message bằng toast
+            })
+            .catch(error => {
+                console.error("Lỗi:", error);
+                alert("Cập nhật thất bại");
+            });
+
+    }
+
+    function deleteStore(Store_id) {
+        if (!confirm("Bạn có chắc chắn muốn xoá nhân viên này?")) return;
+        
+        console.log(Store_id);
+        fetch(`http://localhost:8080/api/admin/xoa_cua_hang?Store_id=${Store_id}`, {
+            method: "DELETE",
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Xoá thất bại");
+                }
+
+                return response.text();
+            })
+            .then(result => {
+                alert(result);
+                // Sau khi xoá, load lại danh sách
+                fetchStore(); // giả sử bạn đã có hàm này để load lại danh sách
+            })
+            .catch(error => {
+                alert("Lỗi: " + error.message);
+            });
+    }
+    
+</script>

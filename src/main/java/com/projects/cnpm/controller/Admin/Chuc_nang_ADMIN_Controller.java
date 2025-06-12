@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
+import javax.swing.text.html.HTML;
+
 import com.projects.cnpm.controller.DTO.ALL_role_DTO;
 import com.projects.cnpm.controller.DTO.CH_DTO;
 import com.projects.cnpm.controller.DTO.NV_DTO;
@@ -65,20 +67,21 @@ public class Chuc_nang_ADMIN_Controller {
     @GetMapping("/all_role")
     public ResponseEntity<?> all_role() {
         List<role_entity> all_role = Role_service.FindAll();
-        if(all_role.isEmpty()){
-            return new ResponseEntity<>("Không có role nào tồn tịa",HttpStatus.NOT_FOUND);
+        if (all_role.isEmpty()) {
+            return new ResponseEntity<>("Không có role nào tồn tịa", HttpStatus.NOT_FOUND);
         }
-        List<ALL_role_DTO> ls_role = all_role.stream().map(role -> new ALL_role_DTO(role.getRole_id(),role.getTen_role())).toList();
+        List<ALL_role_DTO> ls_role = all_role.stream()
+                .map(role -> new ALL_role_DTO(role.getRole_id(), role.getTen_role())).toList();
         return ResponseEntity.ok(ls_role);
     }
-    
+
     @DeleteMapping("/xoa_nv")
-    public ResponseEntity<?> xoa_nv(@RequestParam String id){
-        System.out.println("mã nhân viên: " +id);
-        if (Nhan_vien_service.xoa_nv(id ) == 0) {
-            return  new ResponseEntity<>("Xoá thất bại",HttpStatus.NOT_FOUND);
+    public ResponseEntity<?> xoa_nv(@RequestParam String id) {
+        System.out.println("mã nhân viên: " + id);
+        if (Nhan_vien_service.xoa_nv(id) == 0) {
+            return new ResponseEntity<>("Xoá thất bại", HttpStatus.NOT_FOUND);
         }
-        return  ResponseEntity.ok("Xoá thành công");
+        return ResponseEntity.ok("Xoá thành công");
     }
 
     @GetMapping("/all_CH")
@@ -88,11 +91,11 @@ public class Chuc_nang_ADMIN_Controller {
             return new ResponseEntity<>("Không có cửa hàng nào", HttpStatus.NOT_FOUND);
         }
         List<CH_DTO> all_cua_hang_dto = all_cua_hang.stream()
-                .map(ch -> new CH_DTO(ch.getStore_id(), ch.getTen_cua_hang()))
+                .map(ch -> new CH_DTO(ch.getStore_id(), ch.getTen_cua_hang(), ch.getDia_chi()))
                 .toList();
         return ResponseEntity.ok(all_cua_hang_dto);
     }
-    
+
     @GetMapping("/all_NV")
     public ResponseEntity<?> lay_all_NV() {
         List<nhanvien_entity> all_NV = Nhan_vien_service.FindAll();
@@ -105,12 +108,13 @@ public class Chuc_nang_ADMIN_Controller {
             String name = nv.getTen();
 
             // lấy danh sách tên role
-            List<Role_DTO> roles = nv.getRoles().stream().map(role -> new Role_DTO(role.getTen_role() )).collect(Collectors.toList());
+            List<Role_DTO> roles = nv.getRoles().stream().map(role -> new Role_DTO(role.getTen_role()))
+                    .collect(Collectors.toList());
 
             // lấy tên cửa hàng (có thể kiểm tra null nếu cần)
             String tenCuaHang = nv.getStore() != null ? nv.getStore().getTen_cua_hang() : null;
 
-            return new NV_DTO(id, name,nv.getUsername(),nv.getPasswords(), roles, tenCuaHang);
+            return new NV_DTO(id, name, nv.getUsername(), nv.getPasswords(), roles, tenCuaHang);
         }).toList();
         return ResponseEntity.ok(all_NV_dto);
     }
@@ -308,4 +312,30 @@ public class Chuc_nang_ADMIN_Controller {
         return new ResponseEntity<>("Huỷ thất bại", HttpStatus.BAD_REQUEST);
     }
 
+    @GetMapping("/doanh_thu_x_den_y")
+    public ResponseEntity<?> doanh_thu_x_den_y(@RequestBody Doanh_thu_tu_ngay_x_den_y request) {
+        if (request.getNgay_bat_dau() == null || request.getNgay_kt() == null) {
+            return new ResponseEntity<>("Lỗi ngày tháng", HttpStatus.UNAUTHORIZED);
+        }
+        return ResponseEntity
+                .ok(Chi_tiet_DH_service.doanh_thu_x_den_y(request.getNgay_bat_dau(), request.getNgay_kt()));
+    }
+
+    @DeleteMapping("/xoa_cua_hang")
+    public ResponseEntity<?> xoa_cua_hang(@RequestParam String Store_id) {
+        int kt = Cua_hang_Service.xoa_cua_hang(Store_id);
+        if (kt == 0) {
+            return new ResponseEntity<>("xoá cái nịt", HttpStatus.UNAUTHORIZED);
+        }
+        return ResponseEntity.ok("Xoá cửa hàng thành công");
+    }
+
+    @PatchMapping("/chinh_sua_store")
+    public ResponseEntity<?> chinh_sua_Store(@RequestBody patch_Store request){
+        int kt = Cua_hang_Service.patch_store(request);
+        if (kt == 0) {
+            return new ResponseEntity<>("Chỉnh sửa cái nịt",HttpStatus.NOT_FOUND);
+        }
+        return ResponseEntity.ok("Cập nhật thành công");
+    }
 }

@@ -104,7 +104,7 @@
         <td><input type="text" value="${u.user_name}" style="border: 0px;background: none;"></td>
         <td><input type="text" value="${u.passwords}" style="border: 0px;background: none;"></td>
             <td>${u.roles.map(r => `<span>${r.role_name}</span>`).join(", ")}</td>
-            <td>${u.store?.name || "Không rõ"}</td>
+            <td>${u.ten_cua_hang || "Không rõ"}</td>
         <td>
             <button class="btn btn-sm btn-primary" onclick="logRowData(this, '${u.id}')">Chỉnh sửa</button>
             <button class="btn btn-sm btn-danger" onclick="deleteUser('${u.id}')">Vô hiệu</button>
@@ -163,7 +163,7 @@
                     user_name: data.username,
                     passwords: data.passwords,
                     roles: data.roles,
-                    ten_cua_hang: data.IDCH
+                    ten_cua_hang: document.getElementById("storeSelect").options[storeSelect.selectedIndex].text
                 });
                 renderUserTable(user);
             })
