@@ -56,13 +56,28 @@
         const tbody = document.getElementById("Product-body");
         tbody.innerHTML = data.map(u => `
       <tr>
-            <td>${data.id}</td>
+            <td>${u.id}</td>
             <td><input type="text" value="${u.name}" style="border: 0px;background: none;"></td>
-            <td><input type="text" value="${u.name}" style="border: 0px;background: none;">s</td>
-            <td>Cà phê đắng thấy bà</td>
-            <td>Café</td>
+            <td><input type="num" value="${u.price}" style="border: 0px;background: none;"></td>
+            <td><input type="text" value="${u.mota}" style="border: 0px;background: none;"></td>
+            <td><input type="text" value="${u.ten_loai}" style="border: 0px;background: none;"></td>
             <td><button class="btn">Chỉnh sửa</button> <button class="btn">Xóa</button></td>
         </tr>
     `).join("");
     }
+
+    async function fetchProduct() {
+        try {
+            const res = await fetch("http://localhost:8080/api/admin/all_product");
+            if (!res.ok) throw new Error("Lỗi server");
+            product = await res.json();
+            renderProductTable(product);
+        } catch (err) {
+            console.error("Lỗi tải danh sách nhân viên:", err);
+            document.getElementById('staff-body').innerHTML = `
+        <tr><td colspan="5" class="text-danger">Không thể tải dữ liệu nhân viên</td></tr>
+      `;
+        }
+    }
+    document.addEventListener("DOMContentLoaded",fetchProduct());
 </script>
