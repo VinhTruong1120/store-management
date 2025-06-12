@@ -4,7 +4,7 @@ fetch("https://api.sheetbest.com/sheets/34999d9f-d745-446c-87d6-2fcbc3edf55a")
     const container = document.querySelector(".list-group");
     container.innerHTML = "";
 
-    data.forEach(row => {
+    data.reverse().forEach(row => {
       const name = row["Họ và tên"] || "Khách ẩn danh";
       const phone = row["Số điện thoại"] || "Ẩn";
       const issue = row["Vấn đề"] || "Không ghi rõ";
