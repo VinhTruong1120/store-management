@@ -135,12 +135,20 @@ document.getElementById("order-submit").addEventListener("click", function () {
     const { quantity } = order[ma_sp];
     itemsToSend.push({ product_id: ma_sp, quantity: quantity });
   }
+  
+  let totals = 0;
 
+  for (const ma_sp in order) {
+    const item = order[ma_sp];
+    const itemTotal = item.quantity * item.price;
+    totals += itemTotal;
+  }
   const orderData = {
     ID: orderId,
     ID_nv: employeeId,
     store_id: storeId,
-    items: itemsToSend
+    items: itemsToSend,
+    thanh_tien: totals
   };
   console.log(orderData);
   fetch(`http://localhost:8080/api/sale/mua_hang?pager=${pager}`, {

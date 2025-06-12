@@ -17,9 +17,7 @@
                         <label for="roleSelect">Vai trò</label>
                         <select id="roleSelect" class="form-control-custom">
                             <option value="">Chọn vai trò</option>
-                            <option value="ADMIN">ADMIN</option>
-                            <option value="warehouse">Quản lý kho</option>
-                            <option value="cashier">Thu ngân</option>
+
                         </select>
                     </div>
                     <div class="form-group">
@@ -55,20 +53,33 @@
                 <tr>
                     <th>ID</th>
                     <th>Tên người dùng</th>
+                    <th>Tên đăng nhập</th>
+                    <th>Mật khẩu</th>
                     <th>Vai trò</th>
                     <th>Cửa hàng</th>
                     <th>Thao tác</th>
                 </tr>
             </thead>
             <tbody id="staff-body">
-
+                <tr>
+                    <td>${u.id}</td>
+                    <td><input type="text" value="${u.name}" style="border: 0px;background: none;"></td>
+                    <td><input type="text" value="${u.name}" style="border: 0px;background: none;"></td>
+                    <td><input type="text" value="${u.name}" style="border: 0px;background: none;"></td>
+                    <td>${u.roles.map(r => `<span>${r.role_name}</span>`).join(", ")}</td>
+                    <td>${u.store?.name || "Không rõ"}</td>
+                    <td>
+                        <button class="btn btn-sm btn-primary">Chỉnh sửa</button>
+                        <button class="btn btn-sm btn-danger" onclick="deleteUser('${u.id}')">Vô hiệu</button>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>
 </div>
 
 <script>
-    let user = [];
+    user = [];
 
     async function fetchAllUsers() {
         try {
@@ -89,19 +100,26 @@
         tbody.innerHTML = data.map(u => `
       <tr>
         <td>${u.id}</td>
-        <td>${u.name}</td>
-        <td>${u.roles.map(r => `<span>${r.role_name}</span>`).join(", ")}</td>
-        <td>${u.store?.name || "Không rõ"}</td>
+        <td><input type="text" value="${u.name}" style="border: 0px;background: none;"></td>
+        <td><input type="text" value="${u.user_name}" style="border: 0px;background: none;"></td>
+        <td><input type="text" value="${u.passwords}" style="border: 0px;background: none;"></td>
+            <td>${u.roles.map(r => `<span>${r.role_name}</span>`).join(", ")}</td>
+            <td>${u.ten_cua_hang || "Không rõ"}</td>
         <td>
-          <button class="btn btn-sm btn-primary">Chỉnh sửa</button>
-          <button class="btn btn-sm btn-danger">Vô hiệu</button>
+            <button class="btn btn-sm btn-primary" onclick="logRowData(this, '${u.id}')">Chỉnh sửa</button>
+            <button class="btn btn-sm btn-danger" onclick="deleteUser('${u.id}')">Vô hiệu</button>
         </td>
-      </tr>
+    </tr>
     `).join("");
     }
 
 
+<<<<<<< HEAD
     document.addEventListener("DOMContentLoaded", fetchAllUsers());
+=======
+    document.addEventListener("DOMContentLoaded", fetchAllUsers(), fetchRoles(), fetchStore());
+
+>>>>>>> f0abe9b60af7f636882b2fdfc8489a0f0068473a
     function generateMaNV() {
         const prefix = "NV";
         const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -143,25 +161,120 @@
         }).then(response => response.text())
             .then(result => {
                 alert(result);
-                appendUserToTable(data)
+                user.push({
+                    id: data.ma_nv,
+                    name: data.ten,
+                    user_name: data.username,
+                    passwords: data.passwords,
+                    roles: data.roles,
+                    ten_cua_hang: document.getElementById("storeSelect").options[storeSelect.selectedIndex].text
+                });
+                renderUserTable(user);
             })
             .catch(error => {
                 alert(error);
             })
     })
-    function appendUserToTable(user) {
-        const tbody = document.querySelector("table tbody");
-        const row = document.createElement("tr");
-        row.innerHTML = `
-        <td>${user.id || user.ma_nv}</td>
-        <td>${user.ten}</td>
-        <td>${user.roles.map(r => `<span>${r.role_name}</span>`).join(", ")}</td>
-        <td>${user.IDCH || "Không rõ"}</td>
-        <td>
-            <button class="btn btn-sm btn-primary">Chỉnh sửa</button>
-            <button class="btn btn-sm btn-danger">Vô hiệu</button>
-        </td>
-    `;
-        tbody.appendChild(row);
+    async function fetchRoles() {
+        try {
+            const ls_role = document.getElementById("roleSelect");
+            const res = await fetch("http://localhost:8080/api/admin/all_role");
+            if (!res.ok) throw new Error("Không load được role");
+
+            const roles_data = await res.json();
+
+
+            ls_role.innerHTML = `<option value="">Chọn vai trò</option>` +
+                roles_data.map(item => `
+                <option value="${item.role_id}">${item.role_name}</option>
+            `).join("");
+
+        } catch (error) {
+            console.error("Lỗi load role:", error);
+            alert("Lỗi: " + error.message);
+        }
+    }
+
+    async function fetchStore() {
+        try {
+            const ls_Store = document.getElementById("storeSelect");
+            const res = await fetch("http://localhost:8080/api/admin/all_CH");
+            if (!res.ok) throw new Error("Không load được cửa hàng");
+
+            const Stores_data = await res.json();
+
+
+            ls_Store.innerHTML = `<option value="">Chọn vai trò</option>` +
+                Stores_data.map(item => `
+                <option value="${item.store_id}">${item.ten_cua_hang}</option>
+            `).join("");
+
+        } catch (error) {
+            console.error("Lỗi load role:", error);
+            alert("Lỗi: " + error.message);
+        }
+    }
+
+    function deleteUser(ma_nv) {
+        if (!confirm("Bạn có chắc chắn muốn xoá nhân viên này?")) return;
+        console.log(ma_nv);
+        fetch(`http://localhost:8080/api/admin/xoa_nv?id=${ma_nv}`, {
+            method: "DELETE",
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Xoá thất bại");
+                }
+
+                return response.text();
+            })
+            .then(result => {
+                alert(result);
+                // Sau khi xoá, load lại danh sách
+                fetchAllUsers(); // giả sử bạn đã có hàm này để load lại danh sách
+            })
+            .catch(error => {
+                alert("Lỗi: " + error.message);
+            });
+    }
+
+    function logRowData(button, id) {
+        if (!confirm("Bạn có chắc chắn muốn cập nhật nhân viên này?")) return;
+        const row = button.closest("tr");
+        const [nameInput, usernameInput, passwordInput] = row.querySelectorAll("input");
+
+        const data = {
+            ma_nv: id,
+            ten: nameInput.value,
+            username: usernameInput.value,
+            passwords: passwordInput.value,
+            dia_chi: "",
+            luong: 0,
+            lien_he: [
+                ""
+            ]
+        };
+        fetch("http://localhost:8080/api/admin/chinh_sua_thong_tin_nv", {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Cập nhật thất bại");
+                }
+                fetchAllUsers();
+                return response.text();
+            })
+            .then(result => {
+                alert(result); // hoặc hiển thị message bằng toast
+            })
+            .catch(error => {
+                console.error("Lỗi:", error);
+                alert("Cập nhật thất bại");
+            });
+
     }
 </script>

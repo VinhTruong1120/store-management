@@ -10,6 +10,7 @@ import com.projects.cnpm.DAO.Entity.cuahang_entity;
 import com.projects.cnpm.DAO.Entity.don_hang_entity;
 import com.projects.cnpm.DAO.Entity.nhanvien_entity;
 import com.projects.cnpm.Repository.don_hang_repository;
+import com.projects.cnpm.controller.DTO.doanh_thu_x_y_DTO;
 
 import jakarta.transaction.Transactional;
 
@@ -24,13 +25,14 @@ public class don_hang_service extends BaseSerive<don_hang_entity,String,don_hang
     }
 
     @Transactional
-    public void them_don_hang(String ID,Timestamp ngay_nhan,String trang_thai,cuahang_entity cuahang,nhanvien_entity nv){
+    public void them_don_hang(String ID,Timestamp ngay_nhan,String trang_thai,cuahang_entity cuahang,nhanvien_entity nv,int thanh_tien){
         don_hang_entity moi = new don_hang_entity();
         moi.setMa_don(ID);
         moi.setNgay_nhan(ngay_nhan);
         moi.setStore(cuahang);
         moi.setNv(nv);
         moi.setTrang_thai(trang_thai);
+        moi.setThanhTien(thanh_tien);
         repositoty.save(moi);
     }
 
@@ -55,5 +57,13 @@ public class don_hang_service extends BaseSerive<don_hang_entity,String,don_hang
 
     public cuahang_entity lay_ch_tu_don(String ma_don){
         return repositoty.lay_ch_tu_don(ma_don);
+    }
+
+    public List<doanh_thu_x_y_DTO> doanh_thu_x_den_y(Timestamp start, Timestamp end) {
+       return repositoty.doanhThuTheoNgay(start,end);
+    }
+
+    public List<doanh_thu_x_y_DTO> doanh_thu_xx_den_yy() {
+       return repositoty.thanh_tien_theo_ngay_nhan();
     }
 }

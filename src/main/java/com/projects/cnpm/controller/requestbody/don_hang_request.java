@@ -35,4 +35,11 @@ public class don_hang_request {
     public void setStore_id(String store_id) {
         this.store_id = store_id;
     }
+    private int thanh_tien;
+    public int getThanh_tien() {
+        return thanh_tien;
+    }
+    public void setThanh_tien(int thanh_tien) {
+        this.thanh_tien = thanh_tien;
+    }
 }

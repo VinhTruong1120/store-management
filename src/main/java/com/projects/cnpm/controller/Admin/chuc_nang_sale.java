@@ -101,7 +101,7 @@ public class chuc_nang_sale {
         }
         long currentTimeMillis = System.currentTimeMillis();
         Timestamp time  = new Timestamp(currentTimeMillis);
-        Don_hang_service.them_don_hang(request.getID(), time,"Tiếp nhận",Cua_hang_Service.timTheoId(request.getStore_id()),Nhan_vien_service.timTheoId( request.getID_nv()));
+        Don_hang_service.them_don_hang(request.getID(), time,"Tiếp nhận",Cua_hang_Service.timTheoId(request.getStore_id()),Nhan_vien_service.timTheoId( request.getID_nv()),request.getThanh_tien());
         
         don_hang_entity dh = Don_hang_service.timTheoId(request.getID());
         for(Item item : request.getItems()){
