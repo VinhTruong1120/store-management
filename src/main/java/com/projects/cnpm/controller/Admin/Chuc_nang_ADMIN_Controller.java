@@ -312,7 +312,16 @@ public class Chuc_nang_ADMIN_Controller {
         return new ResponseEntity<>("Huỷ thất bại", HttpStatus.BAD_REQUEST);
     }
 
-    @GetMapping("/doanh_thu_x_den_y")
+    // @GetMapping("/doanh_thu_x_den_y")
+    // public ResponseEntity<?> doanh_thu_x_den_y(@RequestBody Doanh_thu_tu_ngay_x_den_y request) {
+    //     if (request.getNgay_bat_dau() == null || request.getNgay_kt() == null) {
+    //         return new ResponseEntity<>("Lỗi ngày tháng", HttpStatus.UNAUTHORIZED);
+    //     }
+    //     return ResponseEntity
+    //             .ok(Chi_tiet_DH_service.doanh_thu_x_den_y(request.getNgay_bat_dau(), request.getNgay_kt()));
+    // }
+
+    @PostMapping("/doanh_thu_x_den_y")
     public ResponseEntity<?> doanh_thu_x_den_y(@RequestBody Doanh_thu_tu_ngay_x_den_y request) {
         if (request.getNgay_bat_dau() == null || request.getNgay_kt() == null) {
             return new ResponseEntity<>("Lỗi ngày tháng", HttpStatus.UNAUTHORIZED);
