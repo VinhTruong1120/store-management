@@ -12,6 +12,7 @@ import com.projects.cnpm.controller.DTO.ALL_role_DTO;
 import com.projects.cnpm.controller.DTO.CH_DTO;
 import com.projects.cnpm.controller.DTO.NV_DTO;
 import com.projects.cnpm.controller.DTO.Role_DTO;
+import com.projects.cnpm.controller.DTO.all_product_DTO;
 import com.projects.cnpm.controller.requestbody.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,6 +29,7 @@ import com.projects.cnpm.DAO.Entity.don_hang_entity;
 import com.projects.cnpm.DAO.Entity.nguyen_lieu_entity;
 import com.projects.cnpm.DAO.Entity.nhanvien_entity;
 import com.projects.cnpm.DAO.Entity.role_entity;
+import com.projects.cnpm.DAO.Entity.san_pham_entity;
 import com.projects.cnpm.DAO.Entity.Embeddable.kho_id;
 import com.projects.cnpm.Service.chi_tiet_DH_service;
 import com.projects.cnpm.Service.cua_hang_Service;
@@ -63,6 +65,19 @@ public class Chuc_nang_ADMIN_Controller {
     private don_hang_service Don_hang_service;
     @Autowired
     private chi_tiet_DH_service Chi_tiet_DH_service;
+
+    @GetMapping("/all_product")
+    public ResponseEntity<?> all_product() {
+        List<san_pham_entity> all_product = San_pham_service.FindAll();
+        if (all_product.isEmpty()) {
+            return new ResponseEntity<>("Không có sản phẩm ", HttpStatus.NOT_FOUND);
+        }
+        
+        List<all_product_DTO> ls_product = all_product.stream()
+                                                        .map(product -> new all_product_DTO(product.getMa_sp(),product.getTen_sp(),product.getDon_gia(),product.getMo_ta_sp(),product.getLoai().getTen_loai()))
+                                                        .toList();
+        return ResponseEntity.ok(ls_product);
+    }
 
     @GetMapping("/all_role")
     public ResponseEntity<?> all_role() {
@@ -312,7 +327,8 @@ public class Chuc_nang_ADMIN_Controller {
         return new ResponseEntity<>("Huỷ thất bại", HttpStatus.BAD_REQUEST);
     }
 
-    @GetMapping("/doanh_thu_x_den_y")
+    
+    @PostMapping("/doanh_thu_x_den_y")
     public ResponseEntity<?> doanh_thu_x_den_y(@RequestBody Doanh_thu_tu_ngay_x_den_y request) {
         if (request.getNgay_bat_dau() == null || request.getNgay_kt() == null) {
             return new ResponseEntity<>("Lỗi ngày tháng", HttpStatus.UNAUTHORIZED);
@@ -331,10 +347,10 @@ public class Chuc_nang_ADMIN_Controller {
     }
 
     @PatchMapping("/chinh_sua_store")
-    public ResponseEntity<?> chinh_sua_Store(@RequestBody patch_Store request){
+    public ResponseEntity<?> chinh_sua_Store(@RequestBody patch_Store request) {
         int kt = Cua_hang_Service.patch_store(request);
         if (kt == 0) {
-            return new ResponseEntity<>("Chỉnh sửa cái nịt",HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("Chỉnh sửa cái nịt", HttpStatus.NOT_FOUND);
         }
         return ResponseEntity.ok("Cập nhật thành công");
     }
