@@ -23,14 +23,12 @@
                 <div class="form-group">
                     <label for="missionPriority">Loại</label>
                     <select id="missionPriority" class="form-control-custom">
-                        <option value="low">Thấp</option>
-                        <option value="medium">Trung bình</option>
-                        <option value="high">Cao</option>
+                        
                     </select>
                 </div>
             </div>
             <div class="form-actions">
-                <button class="btn btn-success">➕ Thêm nhiệm vụ</button>
+                <button class="btn btn-success" id="Them">➕ Thêm sản phẩm</button>
                 <button class="btn btn-secondary btn-close-form">Hủy</button> 
             </div>
         </div>
@@ -61,7 +59,7 @@
             <td><input type="num" value="${u.price}" style="border: 0px;background: none;"></td>
             <td><input type="text" value="${u.mota}" style="border: 0px;background: none;"></td>
             <td><input type="text" value="${u.ten_loai}" style="border: 0px;background: none;"></td>
-            <td><button class="btn">Chỉnh sửa</button> <button class="btn">Xóa</button></td>
+            <td><button class="btn" onclick= "logRowData(this,'${u.id}' )">Chỉnh sửa</button> <button class="btn" onclick="deleteUser('${u.id}')">Xóa</button></td>
         </tr>
     `).join("");
     }
@@ -79,5 +77,123 @@
       `;
         }
     }
-    document.addEventListener("DOMContentLoaded",fetchProduct());
+
+    async function fetchCate() {
+        const ls_role = document.getElementById("missionPriority");
+        const res = await fetch("http://localhost:8080/api/admin/all_loaiSP");
+        if (!res.ok) throw new Error("Không load được role");
+
+        const roles_data = await res.json();
+
+
+        ls_role.innerHTML = `<option value="">Chọn loại</option>` +
+            roles_data.map(item => `
+                <option value="${item.role_id}">${item.role_name}</option>
+            `).join("");
+    }
+
+    function generateProductId() {
+        const prefix = "SP";
+        const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        let result = prefix;
+        for (let i = 0; i < 8; i++) {
+            result += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        return result;
+    }
+
+    document.getElementById("Them").addEventListener("click", function () {
+        const roleSelect = document.getElementById("missionPriority")
+        const data = {
+            ma_sp: generateProductId(),
+            ten_sp: document.getElementById("missionName").value,
+            don_gia: document.getElementById("missionAssignee").value,
+            mota: document.getElementById("missionDueDate").value,
+            ma_loai: roleSelect.value,
+        };
+        console.log(data)
+        fetch("http://localhost:8080/api/admin/them_san_pham", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        }).then(response => response.text())
+            .then(result => {
+                alert(result);
+                product.push({
+                    id: data.ma_sp,
+                    name: data.ten_sp,
+                    price: data.don_gia,
+                    mota: data.mota,
+                    ten_loai: roleSelect.options[roleSelect.selectedIndex].text,
+                });
+                renderProductTable(product);
+            })
+            .catch(error => {
+                alert(error);
+            })
+    })
+
+    function logRowData(button, ids) {
+        if (!confirm("Bạn có chắc chắn muốn cập sản phẩm này?")) return;
+        const row = button.closest("tr");
+        const [ProductInput, PriceInput, MotaInput] = row.querySelectorAll("input");
+
+        const data = {
+            id: ids,
+            ten: ProductInput.value,
+            price: parseInt( PriceInput.value),
+            mota: MotaInput.value,
+        };
+        console.log(data)
+        fetch("http://localhost:8080/api/admin/path_product", {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Cập nhật thất bại");
+                }
+                fetchProduct();
+                return response.text();
+            })
+            .then(result => {
+                alert(result); // hoặc hiển thị message bằng toast
+            })
+            .catch(error => {
+                console.error("Lỗi:", error);
+                alert("Cập nhật thất bại");
+            });
+
+    }
+
+    function deleteUser(id) {
+        if (!confirm("Bạn có chắc chắn muốn xoá sản phẩm này?")) return;
+        console.log(id);
+        fetch(`http://localhost:8080/api/admin/del_product?id=${id}`, {
+            method: "DELETE",
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Xoá thất bại");
+                }
+
+                return response.text();
+            })
+            .then(result => {
+                alert(result);
+                // Sau khi xoá, load lại danh sách
+                fetchProduct(); // giả sử bạn đã có hàm này để load lại danh sách
+            })
+            .catch(error => {
+                alert("Lỗi: " + error.message);
+            });
+    }
+
+    document.addEventListener("DOMContentLoaded",fetchProduct(),fetchCate());
+
 </script>

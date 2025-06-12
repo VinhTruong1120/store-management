@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.projects.cnpm.DAO.Entity.cuahang_entity;
 import com.projects.cnpm.DAO.Entity.don_hang_entity;
 import com.projects.cnpm.DAO.Entity.nhanvien_entity;
 import com.projects.cnpm.Service.chi_tiet_DH_service;
@@ -21,6 +22,7 @@ import com.projects.cnpm.Service.don_hang_service;
 import com.projects.cnpm.Service.nhanvien_service;
 
 import com.projects.cnpm.controller.requestbody.Doanh_thu_theo_thang;
+import com.projects.cnpm.controller.requestbody.fake_don;
 
 @RestController
 @RequestMapping("/api/manager")
@@ -68,5 +70,14 @@ public class Chuc_nang_manager extends Chuc_nang_ADMIN_Controller{
     }
 
     
-    
+    @PostMapping("/them-nhieu")
+    public String nhanDanhSachDonHang(@RequestBody List<fake_don> danhSachDon) {
+        // Xử lý logic, ví dụ in ra log
+        for (fake_don don : danhSachDon) {
+            nhanvien_entity nv = Nhan_vien_service.timTheoId(don.getNv());
+            cuahang_entity ch = Cua_hang_Service.timTheoId(don.getCuahang());
+           Don_hang_service.them_don_hang(don.getID(), don.getNgay_nhan(), don.getTrang_thai(), ch, nv, don.getThanh_tien());
+        }
+        return "Nhận thành công " + danhSachDon.size() + " đơn hàng.";
+    }
 }

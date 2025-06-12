@@ -21,6 +21,19 @@ public class don_hang_entity {
         return trang_thai;
     }
 
+    @Column(name = "thanhTien",nullable = false)
+    private int ThanhTien;
+
+    public int getThanhTien() {
+        return ThanhTien;
+    }
+
+
+
+    public void setThanhTien(int thanhTien) {
+        ThanhTien = thanhTien;
+    }
+
 
 
     public void setTrang_thai(String trang_thai) {
