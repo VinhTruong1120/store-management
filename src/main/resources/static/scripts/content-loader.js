@@ -113,45 +113,24 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Hàm tải nội dung trang chủ (dashboard)
     function loadHomePage() {
         const homeContent = `
-            <div class="card-section row mt-4">
-                <div class="card-total-sale col-md-4">
-                    <div class="card text-center border-0 shadow">
-                        <div class="card-header bg-warning text-dark">
-                            <i class="fa-solid fa-dollar-sign"></i> Doanh thu
-                        </div>
-                        <div class="card-body bg-dark text-light">
-                            <p>Hôm nay: 9.000.000</p>
-                            <p class="text-secondary">Hôm qua: 14.500.000</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-orders col-md-4">
-                    <div class="card text-center border-0 shadow">
-                        <div class="card-header bg-primary text-light">
-                            <i class="fa-solid fa-file-invoice"></i> Đơn hàng
-                        </div>
-                        <div class="card-body bg-dark text-light">
-                            <p>Hôm nay: 103</p>
-                            <p class="text-secondary">Hôm qua: 198</p>
-                        </div>
-                    </div>
-                </div>
+            <div class="welcome-box text-center p-5 animated-fadein" style="background:#fffbe6; border-radius:16px; border:2px solid #f7b800; box-shadow:0 2px 12px rgba(0,0,0,0.07); transition:box-shadow 0.3s, transform 0.3s;">
+                <h1 class="mb-3 animated-title" style="color:#f7b800; font-weight:bold; letter-spacing:1px;">
+                  <span class="welcome-typing">Chào mừng đến với phần mềm quản lý chuỗi cửa hàng! <i class="fa-solid fa-store"></i></span>
+                </h1>
+                <p style="font-size:1.2rem; color:#444;">Hệ thống giúp bạn quản lý nhân viên, cửa hàng, sản phẩm, đơn hàng và nhiều hơn nữa một cách dễ dàng và hiệu quả.</p>
             </div>
         `;
         dynamicContentArea.innerHTML = homeContent;
         mainTitle.innerHTML = `<i class="fa-solid fa-shop"></i> Home`;
 
-        // Cập nhật trạng thái active của sidebar cho Home
         document.querySelectorAll('#sidebar-menu .nav-link').forEach(link => {
             link.classList.remove('active');
         });
         document.querySelector('.nav-home > .nav-link').classList.add('active');
     }
 
-    // Gắn sự kiện click cho các liên kết sidebar
     document.querySelectorAll('#sidebar-menu .nav-link[data-page]').forEach(link => {
         link.addEventListener('click', function (e) {
             e.preventDefault();
@@ -164,18 +143,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Xử lý click vào nút Home chính (nếu collapse đang mở thì tải dashboard, nếu đóng thì bootstrap tự mở)
     document.querySelector('.nav-home > .nav-link').addEventListener('click', function (e) {
-        // Kiểm tra xem sự kiện click này có phải là do collapse đang mở/đóng không
         const homeSubmenu = document.getElementById('homeSubmenu');
         const isExpanded = homeSubmenu.classList.contains('show');
 
-        // Nếu collapse đang mở và người dùng click vào Home lần nữa, tải dashboard
         if (isExpanded) {
             loadHomePage();
         }
-        // Bootstrap sẽ tự xử lý việc mở/đóng collapse. 
-        // Nếu collapse đang đóng, click lần đầu sẽ mở collapse và không tải dashboard.
+
 
         document.querySelectorAll('#sidebar-menu .nav-link').forEach(link => {
             link.classList.remove('active');
@@ -183,7 +158,6 @@ document.addEventListener('DOMContentLoaded', () => {
         this.classList.add('active');
     });
 
-    // Tải trang chủ mặc định khi DOM đã tải xong
     loadHomePage();
 });
 
