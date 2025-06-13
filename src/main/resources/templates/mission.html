@@ -2,18 +2,18 @@
     <div class="nav-btns">
         <button onclick="showSection('daily-tasks')" data-section="mission" class="active">Product </button> </div>
     <div id="daily-tasks" class="section active">
-        <button class="btn btn-add-item" data-form-id="addMissionForm">➕ Add Product</button>
+        <button class="btn btn-add-item" data-form-id="addMissionForm">➕ Thêm sản phẩm</button>
         
         <div id="addMissionForm" class="add-form-container">
-            <h3>New Product</h3>
-            <button class="btn btn-close-form">✖️ Hủy</button> 
+            <h3>Thêm sản phẩm mới</h3>
+            <button class="btn btn-close-form">✖️</button> 
             <div class="form-grid">
                 <div class="form-group">
-                    <label for="missionName">ProDuct Name</label>
-                    <input type="text" id="missionName" placeholder="nhập tên sản phẩm" class="form-control-custom">
+                    <label for="missionName">Tên sản phẩm</label>
+                    <input type="text" id="missionName" placeholder="Nhập tên sản phẩm" class="form-control-custom">
                 </div>
                 <div class="form-group">
-                    <label for="missionAssignee">Price</label>
+                    <label for="missionAssignee">Giá</label>
                     <input type="number" id="missionAssignee" placeholder="Giá sản phẩm" class="form-control-custom">
                 </div>
                 <div class="form-group">
@@ -29,13 +29,12 @@
             </div>
             <div class="form-actions">
                 <button class="btn btn-success" id="Them">➕ Thêm sản phẩm</button>
-                <button class="btn btn-secondary btn-close-form">Hủy</button> 
             </div>
         </div>
         <table>
             <thead>
                 <tr>
-                    <th>ID</th><th>Product name</th><th>price</th><th>mổ tả</th><th>Loại</th><th>Thao tác</th>
+                    <th>Mã</th><th>Tên sản phẩm</th><th>Giá tiền</th><th>Mô tả</th><th>Loại</th><th>Thao tác</th>
                 </tr>
             </thead>
             <tbody id="Product-body">
