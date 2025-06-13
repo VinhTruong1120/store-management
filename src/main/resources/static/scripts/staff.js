@@ -37,16 +37,71 @@ document.getElementById('Them').addEventListener('click', function() {
         alert('Vui lòng nhập đầy đủ thông tin!');
         return;
     }
+    
+    const dataNhanVien = {
+        id : null,
+        hoten: name,
+        vitri: position,
+        id_ch: store,
+        birthday: dob,
+        dia_chi: address
+    }
+    // const id = 'NV' + String(staffData.length + 1).padStart(4, '0');
+    // staffData.push({ id, name, position, address, dob, store, active: true });
 
-    const id = 'NV' + String(staffData.length + 1).padStart(4, '0');
-    staffData.push({ id, name, position, address, dob, store, active: true });
-    renderStaffTable();
+    fetch('http://localhost:8080/api/manager/tao_staff', {
+        method : 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body : JSON.stringify(dataNhanVien)
+    })
+    .then(res => {
+        if(!res.ok) throw new Error("Tạo thất bại!")
+        return res.json()
+    })
+    .then(data => {
+        alert("Tạo thành công")
+        console.log(data)
+        staffData.push(data)
+        renderStaffTable()
+    })
+    .catch(err =>{
+        console.error("Lỗi khi tạo nhân viên",err);
+        alert("Có lỗi khi tạo nhân viên")
+    })
 
     document.getElementById('addStaffForm').style.display = 'none';
     document.querySelector('.btn-add-staff').style.display = 'inline-block';
     document.getElementById('addStaffForm').querySelector('form').reset();
 });
 
+
+document.addEventListener('DOMContentLoaded', () => {
+    fetch('http://localhost:8080/api/manager/lay_staff', {
+        method: 'POST',
+        headers: {
+            'Content-Type':'application/json'
+        },
+        body: JSON.stringify({})
+    })
+    .then(res => {
+        if(!res.ok) throw new Error("Lỗi không load được danh sách nhân viên")
+        return res.json();
+    })
+    .then(data => {
+        console.log(data)
+        staffData = data.map(item => ({
+        id: item.id,
+        name: item.name,
+        position: item.position,
+        address: item.address,
+        dob: item.dob,
+        store: item.store_name
+    }));
+        renderStaffTable();
+    })
+})
 function createFilterUI() {
     const container = document.querySelector('.container');
     if (!container) return;
