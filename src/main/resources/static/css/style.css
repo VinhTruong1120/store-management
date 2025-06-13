@@ -66,6 +66,7 @@ th, td {
     border: 1px solid black;
     padding: 10px;
     text-align: left; /* Căn trái văn bản trong ô bảng */
+    width: 100px;
 }
 
 th {

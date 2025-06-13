@@ -96,12 +96,19 @@ document.addEventListener('DOMContentLoaded', () => {
         name: item.name,
         position: item.position,
         address: item.address,
-        dob: item.dob,
+        dob: convertToDOB(item.dob),
         store: item.store_name
     }));
         renderStaffTable();
     })
 })
+function convertToDOB(dateString) {
+  if (typeof dateString === 'string' && dateString.includes('T')) {
+    return dateString.split('T')[0];
+  } else {
+    return dateString;
+  }
+}
 function createFilterUI() {
     const container = document.querySelector('.container');
     if (!container) return;
