@@ -1,17 +1,17 @@
 let staffData = [];
 
-document.querySelector('.btn-add-staff').addEventListener('click', function() {
+document.querySelector('.btn-add-staff').addEventListener('click', function () {
     document.getElementById('addStaffForm').style.display = 'block';
     this.style.display = 'none';
 });
 
-document.querySelector('.btn-close-form').addEventListener('click', function() {
+document.querySelector('.btn-close-form').addEventListener('click', function () {
     document.getElementById('addStaffForm').style.display = 'none';
     document.querySelector('.btn-add-staff').style.display = 'inline-block';
     document.getElementById('addStaffForm').querySelector('form').reset();
 });
 
-document.getElementById('Them').addEventListener('click', function() {
+document.getElementById('Them').addEventListener('click', function () {
     const name = document.getElementById('fullName').value.trim();
     const position = document.getElementById('roleSelect').value.trim();
     const store = document.getElementById('storeSelect').value.trim();
@@ -37,39 +37,39 @@ document.getElementById('Them').addEventListener('click', function() {
         alert('Vui lòng nhập đầy đủ thông tin!');
         return;
     }
-    
+
     const dataNhanVien = {
-        id : null,
+        id: null,
         hoten: name,
         vitri: position,
         id_ch: store,
         birthday: dob,
         dia_chi: address
     }
+
     // const id = 'NV' + String(staffData.length + 1).padStart(4, '0');
     // staffData.push({ id, name, position, address, dob, store, active: true });
 
     fetch('http://localhost:8080/api/manager/tao_staff', {
-        method : 'POST',
+        method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body : JSON.stringify(dataNhanVien)
+        body: JSON.stringify(dataNhanVien)
     })
-    .then(res => {
-        if(!res.ok) throw new Error("Tạo thất bại!")
-        return res.json()
-    })
-    .then(data => {
-        alert("Tạo thành công")
-        console.log(data)
-        staffData.push(data)
-        renderStaffTable()
-    })
-    .catch(err =>{
-        console.error("Lỗi khi tạo nhân viên",err);
-        alert("Có lỗi khi tạo nhân viên")
-    })
+        .then(res => {
+            if (!res.ok) throw new Error("Tạo thất bại!")
+            return res.text
+        })
+        .then(data => {
+            alert("Tạo thành công")
+
+            location.reload();
+        })
+        .catch(err => {
+            console.error("Lỗi khi tạo nhân viên", err);
+            alert("Có lỗi khi tạo nhân viên")
+        })
 
     document.getElementById('addStaffForm').style.display = 'none';
     document.querySelector('.btn-add-staff').style.display = 'inline-block';
@@ -81,33 +81,53 @@ document.addEventListener('DOMContentLoaded', () => {
     fetch('http://localhost:8080/api/manager/lay_staff', {
         method: 'POST',
         headers: {
-            'Content-Type':'application/json'
+            'Content-Type': 'application/json'
         },
         body: JSON.stringify({})
     })
-    .then(res => {
-        if(!res.ok) throw new Error("Lỗi không load được danh sách nhân viên")
-        return res.json();
-    })
-    .then(data => {
-        console.log(data)
-        staffData = data.map(item => ({
-        id: item.id,
-        name: item.name,
-        position: item.position,
-        address: item.address,
-        dob: convertToDOB(item.dob),
-        store: item.store_name
-    }));
-        renderStaffTable();
-    })
+        .then(res => {
+            if (!res.ok) throw new Error("Lỗi không load được danh sách nhân viên")
+            return res.json();
+        })
+        .then(data => {
+            console.log(data)
+            staffData = data.map(item => ({
+                id: item.id,
+                name: item.name,
+                position: item.position,
+                address: item.address,
+                dob: convertToDOB(item.dob),
+                store: item.store_name
+            }));
+            renderStaffTable();
+        })
 })
 function convertToDOB(dateString) {
-  if (typeof dateString === 'string' && dateString.includes('T')) {
-    return dateString.split('T')[0];
-  } else {
-    return dateString;
-  }
+    if (typeof dateString === 'string' && dateString.includes('T')) {
+        return dateString.split('T')[0];
+    } else {
+        return dateString;
+    }
+}
+function xoa_staff(id) {
+    if (!confirm("Bạn có muốn xoá nhân viên này?")) return;
+
+    fetch(`http://localhost:8080/api/manager/xoa_staff?id=${encodeURIComponent(id)}`, {
+        method: 'DELETE'
+    })
+        .then(res => {
+            if (!res.ok) throw new Error("Xoá thất bại");
+            return res.text();
+        })
+        .then(message => {
+            alert(message);
+            staffData = staffData.filter(s => s.id !== id);
+            renderStaffTable();
+        })
+        .catch(err => {
+            console.error("Lỗi khi xoá nhân viên:", err);
+            alert("Đã xảy ra lỗi khi xoá nhân viên.");
+        });
 }
 function createFilterUI() {
     const container = document.querySelector('.container');
@@ -135,12 +155,7 @@ function createFilterUI() {
             </select>
             <select id="filter-store" style="padding:4px 8px; border-radius:5px; border:1px solid #bbb;">
                 <option value="">Tất cả cửa hàng</option>
-                <option value="Cửa hàng Quận 1">Cửa hàng Quận 1</option>
-                <option value="Cửa hàng Quận 2">Cửa hàng Quận 2</option>
-                <option value="Cửa hàng Quận 3">Cửa hàng Quận 3</option>
-                <option value="Cửa hàng Quận 4">Cửa hàng Quận 4</option>
-                <option value="Cửa hàng Quận 5">Cửa hàng Quận 5</option>
-                <option value="Cửa hàng Quận 6">Cửa hàng Quận 6</option>
+                
             </select>
             <select id="filter-dob" style="padding:4px 8px; border-radius:5px; border:1px solid #bbb;">
                 <option value="">Sắp xếp ngày sinh</option>
@@ -203,7 +218,7 @@ function renderStaffTable() {
             <td>${staff.store}</td>
             <td>
                 <button class="btn btn-sm btn-primary" onclick="editStaff(${staffData.indexOf(staff)})">Chỉnh sửa</button>
-                <button class="btn btn-sm btn-danger" onclick="toggleActive(${staffData.indexOf(staff)})">Xóa</button>
+                <button class="btn btn-sm btn-danger" onclick="xoa_staff('${staff.id}')">Xóa</button>
             </td>
         `;
         tbody.appendChild(tr);
@@ -320,14 +335,14 @@ function toggleActive(idx) {
 }
 
 function setupFilterEvents() {
-    ['filter-name','filter-position','filter-store','filter-dob'].forEach(id => {
+    ['filter-name', 'filter-position', 'filter-store', 'filter-dob'].forEach(id => {
         const el = document.getElementById(id);
         if (el) el.addEventListener('input', renderStaffTable);
         if (el && el.tagName === 'SELECT') el.addEventListener('change', renderStaffTable);
     });
     const clearBtn = document.getElementById('clear-filter-btn');
     if (clearBtn) {
-        clearBtn.addEventListener('click', function() {
+        clearBtn.addEventListener('click', function () {
             document.getElementById('filter-name').value = '';
             document.getElementById('filter-position').value = '';
             document.getElementById('filter-store').value = '';
@@ -342,3 +357,42 @@ window.addEventListener('DOMContentLoaded', () => {
     setupFilterEvents();
     renderStaffTable();
 });
+
+async function fetchStore() {
+    try {
+        const ls_Store = document.getElementById("store-body");
+        const res = await fetch("http://localhost:8080/api/admin/all_CH");
+        if (!res.ok) throw new Error("Không load được cửa hàng");
+
+        store = await res.json();
+        console.log(store);
+        create_fill_select_store_ui(store);
+        create_Add_select_store_ui(store);
+    } catch (error) {
+        console.error("Lỗi load role:", error);
+        alert("Lỗi: " + error.message);
+    }
+}
+fetchStore();
+
+function create_fill_select_store_ui(store) {
+    const select = document.getElementById("filter-store");
+    store.forEach(data => {
+        const option = document.createElement("option");
+        option.value = data.ten_cua_hang;
+        option.text = data.ten_cua_hang;
+        select.appendChild(option);
+    })
+
+}
+
+function create_Add_select_store_ui(store) {
+    const select = document.getElementById("storeSelect");
+    store.forEach(data => {
+        const option = document.createElement("option");
+        option.value = data.store_id;
+        option.text = data.ten_cua_hang;
+        select.appendChild(option);
+    })
+
+}
