@@ -23,12 +23,14 @@ import com.projects.cnpm.DAO.Entity.staff_entity;
 import com.projects.cnpm.Service.chi_tiet_DH_service;
 import com.projects.cnpm.Service.cua_hang_Service;
 import com.projects.cnpm.Service.don_hang_service;
-
+import com.projects.cnpm.Service.loai_sp_service;
 import com.projects.cnpm.Service.nhanvien_service;
+import com.projects.cnpm.Service.san_pham_service;
 import com.projects.cnpm.Service.staff_service;
 import com.projects.cnpm.controller.DTO.all_staff;
 import com.projects.cnpm.controller.requestbody.Doanh_thu_theo_thang;
 import com.projects.cnpm.controller.requestbody.fake_don;
+import com.projects.cnpm.controller.requestbody.san_pham_moi_request;
 import com.projects.cnpm.controller.requestbody.staff;
 import com.projects.cnpm.controller.requestbody.tao_CH_request;
 
@@ -38,6 +40,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 @RestController
 @RequestMapping("/api/manager")
 public class Chuc_nang_manager extends Chuc_nang_ADMIN_Controller {
+
+    @Autowired
+    private loai_sp_service Loai_sp_service;
+
+    @Autowired
+    private san_pham_service San_pham_service;
 
     @Autowired
     private staff_service Staff_service;
@@ -227,4 +235,34 @@ public class Chuc_nang_manager extends Chuc_nang_ADMIN_Controller {
                 HttpStatus.PARTIAL_CONTENT);
     }
 
+    @PostMapping("/them_nhieu_sp")
+    public ResponseEntity<?> themNhieuSanPham(@RequestBody List<san_pham_moi_request> requests) {
+    List<String> errors = new ArrayList<>();
+
+    for (san_pham_moi_request request : requests) {
+        if (San_pham_service.kiemTraTonTai(request.getMa_sp())) {
+            errors.add("Sản phẩm với mã " + request.getMa_sp() + " đã tồn tại.");
+            continue;
+        }
+
+        if (!Loai_sp_service.kiemTraTonTai(request.getMa_loai())) {
+            errors.add("Loại sản phẩm với mã " + request.getMa_loai() + " không tồn tại.");
+            continue;
+        }
+
+        San_pham_service.them_san_pham(
+            request.getMa_sp(),
+            request.getTen_sp(),
+            request.getDon_gia(),
+            request.getMota(),
+            Loai_sp_service.timTheoId(request.getMa_loai())
+        );
+    }
+
+    if (!errors.isEmpty()) {
+        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+    }
+
+    return new ResponseEntity<>("Thêm tất cả sản phẩm thành công", HttpStatus.OK);
+}
 }
