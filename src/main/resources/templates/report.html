@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,7 +13,9 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/style.css">
+
 </head>
+
 <body>
     <!-- Login Form -->
     <div id="login-screen">
@@ -30,17 +33,26 @@
     </div>
     <!-- Sidebar -->
     <div class="row">
+
+        <!-- Main Content -->
         <div id="sidebar" class="d-flex col-lg-3 col-md-5 col-sm-12">
             <nav class="sidebar bg-dark text-light p-3">
                 <h4 id="role" class="text-warning"><i class="fa-solid fa-store"></i></h4>
                 <ul id="sidebar-menu" class="nav flex-column">
-                    <li class="nav-item nav-home"><a href="index.html" class="nav-link"><i class="fa-solid fa-house"></i> Home</a></li>
-                    <li class="nav-item nav-report"><a href="report.html" class="nav-link"><i class="fa-solid fa-file-invoice"></i> Report</a></li>
-                    <li class="nav-item nav-goods"><a href="goods.html" class="nav-link"><i class="fa-solid fa-box"></i> Goods</a></li>
-                    <li class="nav-item nav-order"><a href="order.html" class="nav-link"><i class="fa-solid fa-clipboard-list"></i> Order</a></li>
-                    <li class="nav-item nav-staff"><a href="staff.html" class="nav-link"><i class="fa-solid fa-user"></i> Staff</a></li>
-                    <li class="nav-item nav-after-sale"><a href="after-sale.html" class="nav-link"><i class="fa-solid fa-headset"></i> After-sale</a></li>
-                    <li class="nav-item nav-review"><a href="review.html" class="nav-link"><i class="fa-solid fa-star"></i> Review</a></li>
+                    <li class="nav-item nav-home"><a href="index.html" class="nav-link"><i
+                                class="fa-solid fa-house"></i> Home</a></li>
+                    <li class="nav-item nav-report"><a href="report.html" class="nav-link"><i
+                                class="fa-solid fa-file-invoice ac"></i> Report</a></li>
+                    <li class="nav-item nav-goods"><a href="goods.html" class="nav-link"><i
+                                class="fa-solid fa-box ac"></i> Goods</a></li>
+                    <li class="nav-item nav-order"><a href="order.html" class="nav-link"><i
+                                class="fa-solid fa-clipboard-list ac"></i> Order</a></li>
+                    <li class="nav-item nav-staff"><a href="staff.html" class="nav-link"><i
+                                class="fa-solid fa-user ac"></i> Staff</a></li>
+                    <li class="nav-item nav-after-sale"><a href="after-sale.html" class="nav-link"><i
+                                class="fa-solid fa-headset ac"></i> After-sale</a></li>
+                    <li class="nav-item nav-review"><a href="review.html" class="nav-link"><i
+                                class="fa-solid fa-star ac"></i> Review</a></li>
                     <li class="nav-item mt-auto">
                         <a href="#" class="nav-link text-danger" onclick="logout()">
                             <i class="fa-solid fa-right-from-bracket"></i>Logout
@@ -49,17 +61,16 @@
                 </ul>
             </nav>
         </div>
-        <!-- Main Content -->
 
-        <div id="main-content" class="main-content col-lg-9 col-md-7 col-sm-12">
-            <div class="main-header d-flex bg-dark w-100">
-                <h5 id="main-title" class="text-warning"><i class="fa-solid fa-shop"> REPORT</i></h5>
+        <div id="main-content" class="main-content col-lg-9 col-md-7 col-sm-12 ">
+            <div class=" py-2 d-flex  w-100 justify-content-center">
+                <h5 id="main-title" class="text-dark"><i class="fa-solid fa-shop"> REPORT</i></h5>
             </div>
             <div class="container">
                 <label>Từ ngày</label>
-                <input id="fromDate"type="date">
+                <input id="fromDate" type="date">
                 <label>Tới ngày</label>
-                <input id="toDate"type="date">
+                <input id="toDate" type="date">
                 <button id="filterDate" class="btn btn-warning">Lọc</button>
                 <canvas id="reportRevenueChart" height="120"></canvas>
             </div>
@@ -70,4 +81,5 @@
     <script src="./scripts/login-logout.js"></script>
     <script src="./scripts/content-loader.js"></script>
 </body>
+
 </html>

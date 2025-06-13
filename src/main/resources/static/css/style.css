@@ -1,7 +1,6 @@
 body {
     background-color: #fff8dc;
-    margin: 20px;
-    font-family: Arial, sans-serif; 
+    font-family: Arial, sans-serif;
 }
 
 .admin-container {
@@ -32,11 +31,11 @@ h2 {
     padding: 10px;
     cursor: pointer;
     font-size: 18px;
-    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease; 
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
 .nav-btns button.active {
-    background-color: #fff8dc; 
+    background-color: #fff8dc;
     color: black;
 }
 
@@ -57,7 +56,8 @@ table {
     background-color: #fabe00;
 }
 
-th, td {
+th,
+td {
     border: 1px solid black;
     padding: 10px;
     text-align: left;
@@ -78,7 +78,7 @@ th {
 }
 
 .btn:hover {
-    background-color: #fff8dc; 
+    background-color: #fff8dc;
     color: black;
 }
 
@@ -86,7 +86,7 @@ th {
     background-color: #fff8dc;
     color: black;
     border-color: #fff8dc;
-    transform: translateY(1px); 
+    transform: translateY(1px);
 }
 
 .btn.blue {
@@ -103,7 +103,7 @@ th {
     width: 260px;
     height: 100vh;
     position: fixed;
-    background-color: gray; 
+    background-color: gray;
     display: flex;
     flex-direction: column;
     padding: 15px;
@@ -160,7 +160,7 @@ th {
 .sidebar .nav-item .active {
     background-color: #ffc107 !important;
     color: black !important;
-    border-radius: 25px; 
+    border-radius: 25px;
     font-weight: bold;
 }
 
@@ -262,7 +262,7 @@ th {
     position: relative;
     border: 1px solid #e0b800;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    display: none; 
+    display: none;
 }
 
 .add-form-container.active {
@@ -347,6 +347,7 @@ th {
     color: white;
     border-color: #28a745;
 }
+
 .btn-success:hover {
     background-color: #218838;
     border-color: #1e7e34;
@@ -357,6 +358,7 @@ th {
     color: white;
     border-color: #6c757d;
 }
+
 .btn-secondary:hover {
     background-color: #5a6268;
     border-color: #545b62;
