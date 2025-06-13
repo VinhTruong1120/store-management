@@ -1,0 +1,182 @@
+body {
+    background: #fdf6dc;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.staff-container {
+    background: #f7b800;
+    border-radius: 10px;
+    border: 3px solid #000;
+    margin: 40px auto;
+    max-width: 1100px;
+    padding: 30px 20px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+}
+
+.staff-header {
+    background: #222;
+    color: #f7b800;
+    padding: 12px 0 12px 30px;
+    border-radius: 8px 8px 0 0;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.staff-table {
+    background: #f7b800;
+    border-radius: 8px;
+    border: 2px solid #000;
+    width: 100%;
+    margin-bottom: 0;
+}
+
+.staff-table th, .staff-table td {
+    text-align: center;
+    vertical-align: middle;
+    border: 1.5px solid #000;
+    padding: 10px 8px;
+    font-size: 1rem;
+}
+
+.staff-table th {
+    background: #fffbe6;
+    color: #222;
+    font-weight: bold;
+}
+
+.staff-table tr:nth-child(even) {
+    background: #ffe066;
+}
+
+.staff-table tr:nth-child(odd) {
+    background: #f7b800;
+}
+
+.btn-staff {
+    background: #111;
+    color: #f7b800;
+    border: none;
+    border-radius: 5px;
+    padding: 6px 16px;
+    margin: 2px 0;
+    font-weight: 500;
+    transition: background 0.2s, color 0.2s;
+}
+
+.btn-staff:hover {
+    background: #f7b800;
+    color: #111;
+    border: 1.5px solid #111;
+}
+
+.add-staff-btn {
+    background: #111;
+    color: #f7b800;
+    border-radius: 5px;
+    padding: 8px 18px;
+    font-weight: 600;
+    margin-bottom: 18px;
+    border: none;
+    transition: background 0.2s, color 0.2s;
+}
+
+.add-staff-btn:hover {
+    background: #f7b800;
+    color: #111;
+    border: 1.5px solid #111;
+}
+
+.staff-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.2);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.staff-form-popup {
+    background: #ffd600;
+    border-radius: 12px;
+    padding: 32px 28px 24px 28px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    min-width: 700px;
+    max-width: 98vw;
+    position: relative;
+    animation: popupIn 0.2s;
+}
+@keyframes popupIn {
+    from { transform: scale(0.95); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+.staff-form-popup h2 {
+    text-align: center;
+    color: #444;
+    margin-bottom: 18px;
+}
+.staff-form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px 24px;
+    margin-bottom: 18px;
+}
+.staff-form-popup label {
+    font-weight: 500;
+    margin-bottom: 4px;
+    color: #333;
+}
+.staff-form-popup input,
+.staff-form-popup select {
+    width: 100%;
+    padding: 8px 12px;
+    border-radius: 5px;
+    border: 1.5px solid #bbb;
+    font-size: 1rem;
+    background: #fffbe6;
+    margin-bottom: 4px;
+}
+.staff-form-popup input:focus,
+.staff-form-popup select:focus {
+    outline: 2px solid #f7b800;
+}
+.staff-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+.staff-form-popup .close-btn {
+    position: absolute;
+    top: 12px;
+    right: 18px;
+    background: #fffbe6;
+    color: #d32f2f;
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+.staff-form-popup .close-btn:hover {
+    background: #ffe066;
+}
+.staff-form-popup .submit-btn {
+    background: #43b324;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 22px;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+.staff-form-popup .submit-btn:hover {
+    background: #388e1b;
+}
+.hidden { display: none !important; }
