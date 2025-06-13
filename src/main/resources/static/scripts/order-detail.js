@@ -127,8 +127,8 @@ function getPagerNumberFromURL() {
 document.getElementById("order-submit").addEventListener("click", function () {
   const pager = getPagerNumberFromURL();
   const orderId = generateOrderId();
-  const employeeId = "NV0001"; // Hãy thay thế bằng cách lấy ID nhân viên thực tế
-  const storeId = "STORE003";   // Hãy thay thế bằng cách lấy ID cửa hàng thực tế
+  const employeeId = ""; // Hãy thay thế bằng cách lấy ID nhân viên thực tế
+  const storeId = "";   // Hãy thay thế bằng cách lấy ID cửa hàng thực tế
   const itemsToSend = [];
   console.log(orderId);
   for (const ma_sp in order) {
