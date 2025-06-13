@@ -1,0 +1,130 @@
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Dashboard</title>
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/staff.css">
+
+</head>
+<body style="background: #fdf6dc;">
+    <!-- man hinh dang nhap -->
+    <div id="login-screen" style="display: none;">
+        <form id="login-form" class="bg-light p-4 rounded shadow">
+            <h4 class="mb-3 text-center text-dark">Login</h4>
+            <div class="mb-3">
+                <input type="text" id="username" class="form-control" placeholder="Username" required>
+            </div>
+            <div class="mb-3">
+                <input type="password" id="password" class="form-control" placeholder="Password" required>
+            </div>
+            <button type="submit" class="btn btn-warning w-100">Login</button>
+        </form>
+        <p id="login-status"></p>
+    </div>
+    <!-- Sidebar -->
+     <div id="sidebar" class="d-flex">
+        <div id="sidebar" class="d-flex col-lg-3 col-md-5 col-sm-12">
+            <nav class="sidebar bg-dark text-light p-3">
+                <h4 id="role" class="text-warning"><i class="fa-solid fa-store"></i></h4>
+                <ul id="sidebar-menu" class="nav flex-column">
+                    <li class="nav-item nav-home"><a href="index.html" class="nav-link"><i class="fa-solid fa-house"></i> Home</a></li>
+                    <li class="nav-item nav-report"><a href="report.html" class="nav-link"><i class="fa-solid fa-file-invoice"></i> Report</a></li>
+                    <li class="nav-item nav-goods"><a href="goods.html" class="nav-link"><i class="fa-solid fa-box"></i> Goods</a></li>
+                    <li class="nav-item nav-order"><a href="order.html" class="nav-link"><i class="fa-solid fa-clipboard-list"></i> Order</a></li>
+                    <li class="nav-item nav-staff"><a href="staff.html" class="nav-link"><i class="fa-solid fa-user"></i> Staff</a></li>
+                    <li class="nav-item nav-after-sale"><a href="after-sale.html" class="nav-link"><i class="fa-solid fa-headset"></i> After-sale</a></li>
+                    <li class="nav-item nav-review"><a href="review.html" class="nav-link"><i class="fa-solid fa-star"></i> Review</a></li>
+                    <li class="nav-item mt-auto">
+                        <a href="#" class="nav-link text-danger" onclick="logout()">
+                            <i class="fa-solid fa-right-from-bracket"></i>Logout
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+     </div>
+    <!-- logo staff -->
+    <div class="main-header d-flex bg-dark" style="width: 70%; margin-left: 280px; height: 50px; justify-content: space-between; display: flex;align-items: center; border-radius: 8px;">
+        <h5 id="pager-title" class="text-warning"><i class="fa-solid fa-user"></i> Staff</h5>
+    </div>
+    <div class="container mt-5">
+        <div class="p-4" style="background: #f7b800; border-radius: 10px; border: 3px solid #000;">
+            <button class="btn btn-add-staff btn-add-item" data-form-id="addStaffForm">👥 Thêm người dùng</button>
+
+            <div id="addStaffForm" class="add-form-container">
+                <h3>Thêm người dùng mới</h3>
+                <button class="btn btn-close-form">✖️</button>
+                <form action="">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="fullName">Tên nhân viên</label>
+                            <input type="text" id="fullName" placeholder="Nhập họ và tên" class="form-control-custom">
+                        </div>
+                        <div class="form-group">
+                            <label for="roleSelect">Vị trí</label>
+                            <select id="roleSelect" class="form-control-custom">
+                                <option value="">Chọn vị trí</option>
+                                <option value="Nhân viên thu ngân">Nhân viên thu ngân</option>
+                                <option value="Nhân viên phục vụ">Nhân viên phục vụ</option>
+                                <option value="Nhân viên pha chế">Nhân viên pha chế</option>
+                                <option value="Nhân viên tạp vụ">Nhân viên tạp vụ</option>
+                                <option value="Nhân viên bảo vệ">Nhân viên bảo vệ</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="storeSelect">Cửa hàng</label>
+                            <select id="storeSelect" class="form-control-custom">
+                                <option value="">Chọn cửa hàng</option>
+                                <option value="Cửa hàng Quận 1">Cửa hàng Quận 1</option>
+                                <option value="Cửa hàng Quận 2">Cửa hàng Quận 2</option>
+                                <option value="Cửa hàng Quận 3">Cửa hàng Quận 3</option>
+                                <option value="Cửa hàng Quận 4">Cửa hàng Quận 4</option>
+                                <option value="Cửa hàng Quận 5">Cửa hàng Quận 5</option>
+                                <option value="Cửa hàng Quận 6">Cửa hàng Quận 6</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Địa chỉ</label>
+                            <input type="text" id="address" placeholder="Nhập Địa chỉ" class="form-control-custom">
+                        </div>
+                        <div class="form-group">
+                            <label for="NS">Ngày sinh</label>
+                            <input type="date" id="NS" placeholder="Ngày sinh" class="form-control-custom">
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button class="btn btn-success" id="Them" type="button">➕ Thêm người dùng</button>
+                    </div>
+                </form>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Mã nhân viên</th>
+                        <th>Tên nhân viên</th>
+                        <th>Vị trí</th>
+                        <th>Địa chỉ</th>
+                        <th>Ngày sinh</th>
+                        <th>Cửa hàng</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody id="staff-body">
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- Bootstrap Script -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./scripts/login-logout.js"></script>
+    <script src="./scripts/staff.js"></script>
+</body>
+
+</html>

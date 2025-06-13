@@ -7,7 +7,7 @@
 
         <div id="addStoreForm" class="add-form-container" style="display: none;">
             <h3>Thêm cửa hàng mới</h3>
-            <button class="btn btn-close-form">✖️ Hủy</button>
+            <button class="btn btn-close-form">✖️</button>
             <div class="form-grid">
                 <div class="form-group">
                     <label for="storeName">Tên cửa hàng</label>
@@ -24,19 +24,18 @@
                 <div class="form-group">
                     <label for="storeManager">Quản lý</label>
                     <select id="storeManager" class="form-control-custom">
-                        <option value="">Chọn quản lý</option>
+                        <option value="Chọn quản lý"></option>
                     </select>
                 </div>
             </div>
             <div class="form-actions">
                 <button class="btn btn-success" id="Them">➕ Thêm cửa hàng</button>
-                <button class="btn btn-secondary btn-close-form">Hủy</button>
             </div>
         </div>
         <table>
             <thead>
                 <tr>
-                    <th>ID</th>
+                    <th>Mã</th>
                     <th>Tên cửa hàng</th>
                     <th>Địa chỉ</th>
                     <th>Trạng thái</th>
@@ -80,7 +79,7 @@
         const roles_data = await res.json();
 
 
-        ls_role.innerHTML = `<option value="">Chọn vai trò</option>` +
+        ls_role.innerHTML = `<option value="">Chọn quản lý</option>` +
             roles_data.map(item => `
                 <option value="${item.id}">${item.name}</option>
             `).join("");
@@ -92,7 +91,7 @@
             if (!res.ok) throw new Error("Không load được cửa hàng");
 
             store = await res.json();
-
+            console.log(store);
             renderStoreTable(store);
         } catch (error) {
             console.error("Lỗi load role:", error);
@@ -152,6 +151,7 @@
                     store_id: data.store_id,
                     ten_cua_hang: data.ten_ch,
                     dia_chi: data.dia_chi,
+                    contact: data.contact[0]
                 });
                 renderStoreTable(store);
             })
@@ -168,8 +168,8 @@
         const data = {
             id: ids,
             store_name: ten_cua_hangInput.value,
-            address: dia_chiInput.value
-            
+            address: dia_chiInput.value,
+            contact: row.querySelector("input[type='text']").value,
         };
         fetch("http://localhost:8080/api/admin/chinh_sua_store", {
             method: "PATCH",

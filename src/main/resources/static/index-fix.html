@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Branche Dashboard</title>
+     <!-- Bootstrap 5 -->
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+     <!-- Font Awesome -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+     <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Login Form -->
+    <div id="login-screen" style="display: none;">
+        <form id="login-form" class="bg-light p-4 rounded shadow">
+            <h4 class="mb-3 text-center text-dark">Login</h4>
+            <div class="mb-3">
+                <input type="text" id="username" class="form-control" placeholder="Username" required>
+            </div>
+            <div class="mb-3">
+                <input type="password" id="password" class="form-control" placeholder="Password" required>
+            </div>
+            <button type="submit" class="btn btn-warning w-100">Login</button>
+        </form>
+        <p id="login-status"></p>
+    </div>
+    <!-- Sidebar -->
+     <div id="sidebar" class="d-flex">
+        <nav class="sidebar bg-dark text-light p-3">
+            <h4 id="role" class="text-warning"><i class="fa-solid fa-store"></i></h4>
+            <ul id="sidebar-menu" class="nav flex-column">
+                <!--Phân cấp nút home-->
+                <li class="nav-item nav-home">
+                    <a class="nav-link active" data-bs-toggle="collapse" href="#homeSubmenu" role="button" aria-expanded="false" aria-controls="homeSubmenu">
+                        <i class="fa-solid fa-house"></i> Home</a>
+                    <div class="collapse show" id="homeSubmenu">
+                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                            <li><a href="./manager.html" class="nav-link ps-4 py-2" data-page="manager">User</a></li>
+                            <li><a href="./store.html" class="nav-link ps-4 py-2" data-page="store">Store</a></li>
+                            <li><a href="./mission.html" class="nav-link ps-4 py-2" data-page="role">Product</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item nav-report"><a href="report.html" class="nav-link"><i class="fa-solid fa-file-invoice"></i> Report</a></li>
+                <li class="nav-item nav-goods"><a href="goods.html" class="nav-link"><i class="fa-solid fa-box" ></i> Goods</a></li>
+                <li class="nav-item nav-order"><a href="order.html" class="nav-link"><i class="fa-solid fa-clipboard-list" ></i> Order</a></li>
+                <li class="nav-item nav-staff"><a href="staff.html" class="nav-link"><i class="fa-solid fa-user" ></i> Staff</a></li>
+                <li class="nav-item nav-after-sale"><a href="after-sale.html" class="nav-link"><i class="fa-solid fa-headset" ></i> After-sale</a></li>
+                <li class="nav-item nav-review"><a href="review.html" class="nav-link"><i class="fa-solid fa-star"></i> Review</a></li>
+                <li class="nav-item mt-auto">
+                    <a href="#" class="nav-link text-danger" onclick="logout()">
+                        <i class="fa-solid fa-right-from-bracket"></i>Logout
+                    </a>
+                </li>
+            </ul>
+        </nav>
+     </div>
+     <!-- Main Content -->
+     <div id="main-content" class="main-content p-4 w-100">
+        <div class="main-header d-flex bg-dark">
+            <h5 id="main-title" class="text-warning"><i class="fa-solid fa-shop"> Home</i></h5>
+        </div>
+
+        <div id="dynamic-content-area" class="mt-4">
+            <div class="welcome-box text-center p-5 animated-fadein" style="background:#fffbe6; border-radius:16px; border:2px solid #f7b800; box-shadow:0 2px 12px rgba(0,0,0,0.07); transition:box-shadow 0.3s, transform 0.3s;">
+                <h1 class="mb-3 animated-title" style="color:#f7b800; font-weight:bold; letter-spacing:1px;">
+                  <span class="welcome-typing">Chào mừng đến với phần mềm quản lý chuỗi cửa hàng! <i class="fa-solid fa-store"></i></span>
+                </h1>
+                <p style="font-size:1.2rem; color:#444;">Hệ thống giúp bạn quản lý nhân viên, cửa hàng, sản phẩm, đơn hàng và nhiều hơn nữa một cách dễ dàng và hiệu quả.</p>
+            </div>
+        </div>
+        <style>
+        .animated-fadein {
+          animation: fadeInBox 1.2s cubic-bezier(.39,.58,.57,1) both;
+        }
+        @keyframes fadeInBox {
+          0% { opacity: 0; transform: translateY(40px) scale(0.98); }
+          100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .welcome-box:hover {
+          box-shadow: 0 6px 32px 0 #f7b80055, 0 2px 12px rgba(0,0,0,0.10);
+          transform: scale(1.015);
+        }
+        .animated-title {
+          overflow: hidden;
+          white-space: nowrap;
+          border-right: 3px solid #f7b800;
+          animation: typing 2.2s steps(40, end), blink-caret 0.7s step-end infinite;
+        }
+        @keyframes typing {
+          from { width: 0 }
+          to { width: 100% }
+        }
+        @keyframes blink-caret {
+          from, to { border-color: transparent }
+          100% { border-color: #f7b800; }
+        }
+        </style>
+     </div>
+     <!-- Bootstrap Script -->
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+     
+     <script src="login-logout.js"></script>
+     <script src="content-loader.js"></script>
+</body>
+</html>

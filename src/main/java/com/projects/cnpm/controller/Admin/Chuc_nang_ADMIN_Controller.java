@@ -89,7 +89,12 @@ public class Chuc_nang_ADMIN_Controller {
         }
         
         List<all_product_DTO> ls_product = all_product.stream()
-                                                        .map(product -> new all_product_DTO(product.getMa_sp(),product.getTen_sp(),product.getDon_gia(),product.getMo_ta_sp(),product.getLoai().getTen_loai()))
+                                                        .map(product -> new all_product_DTO(product.getMa_sp(),
+                                                        product.getTen_sp(),
+                                                        product.getDon_gia(),
+                                                        product.getMo_ta_sp(),
+                                                        product.getLoai().getMa_loai(),
+                                                        product.getLoai().getTen_loai()))
                                                         .toList();
         return ResponseEntity.ok(ls_product);
     }

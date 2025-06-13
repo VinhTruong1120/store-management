@@ -1,46 +1,56 @@
 <div class="admin-container">
     <div class="nav-btns">
-        <button onclick="showSection('daily-tasks')" data-section="mission" class="active">Product </button> </div>
+        <button onclick="showSection('daily-tasks')" data-section="mission" class="active">Product </button>
+    </div>
     <div id="daily-tasks" class="section active">
-        <button class="btn btn-add-item" data-form-id="addMissionForm">➕ Add Product</button>
-        
+        <button class="btn btn-add-item" data-form-id="addMissionForm">➕ Thêm sản phẩm</button>
+
         <div id="addMissionForm" class="add-form-container">
-            <h3>New Product</h3>
-            <button class="btn btn-close-form">✖️ Hủy</button> 
+            <h3>Thêm sản phẩm mới</h3>
+            <button class="btn btn-close-form">✖️</button>
             <div class="form-grid">
                 <div class="form-group">
-                    <label for="missionName">ProDuct Name</label>
-                    <input type="text" id="missionName" placeholder="nhập tên sản phẩm" class="form-control-custom">
+                    <label for="missionName">Tên sản phẩm</label>
+                    <input type="text" id="missionName" placeholder="Nhập tên sản phẩm" class="form-control-custom">
                 </div>
                 <div class="form-group">
-                    <label for="missionAssignee">Price</label>
+                    <label for="missionAssignee">Giá</label>
                     <input type="number" id="missionAssignee" placeholder="Giá sản phẩm" class="form-control-custom">
                 </div>
                 <div class="form-group">
                     <label for="missionDueDate">Mô tả sản phẩm</label>
-                    <input type="text" id="missionDueDate" placeholder="Mô tả ngắn cho sản phẩm" class="form-control-custom">
+                    <input type="text" id="missionDueDate" placeholder="Mô tả ngắn cho sản phẩm"
+                        class="form-control-custom">
                 </div>
                 <div class="form-group">
                     <label for="missionPriority">Loại</label>
                     <select id="missionPriority" class="form-control-custom">
-                        
+
                     </select>
                 </div>
             </div>
             <div class="form-actions">
                 <button class="btn btn-success" id="Them">➕ Thêm sản phẩm</button>
-                <button class="btn btn-secondary btn-close-form">Hủy</button> 
             </div>
         </div>
         <table>
             <thead>
                 <tr>
-                    <th>ID</th><th>Product name</th><th>price</th><th>mổ tả</th><th>Loại</th><th>Thao tác</th>
+                    <th>Mã</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Giá tiền</th>
+                    <th>Mô tả</th>
+                    <th>Loại</th>
+                    <th>Thao tác</th>
                 </tr>
             </thead>
             <tbody id="Product-body">
                 <tr>
-                    <td>2</td><td>cafe  sữa</td><td>20.000đ</td><td>Cà phê đắng thấy bà</td><td>Café</td>
+                    <td>2</td>
+                    <td>cafe sữa</td>
+                    <td>20.000đ</td>
+                    <td>Cà phê đắng thấy bà</td>
+                    <td>Café</td>
                     <td><button class="btn">Chỉnh sửa</button> <button class="btn">Xóa</button></td>
                 </tr>
             </tbody>
@@ -50,33 +60,59 @@
 
 <script>
     product = []
+    cate = []
     function renderProductTable(data) {
         const tbody = document.getElementById("Product-body");
+
+        // Gắn HTML thô trước
         tbody.innerHTML = data.map(u => `
-      <tr>
+        <tr>
             <td>${u.id}</td>
             <td><input type="text" value="${u.name}" style="border: 0px;background: none;"></td>
             <td><input type="num" value="${u.price}" style="border: 0px;background: none;"></td>
             <td><input type="text" value="${u.mota}" style="border: 0px;background: none;"></td>
-            <td><input type="text" value="${u.ten_loai}" style="border: 0px;background: none;"></td>
-            <td><button class="btn" onclick= "logRowData(this,'${u.id}' )">Chỉnh sửa</button> <button class="btn" onclick="deleteUser('${u.id}')">Xóa</button></td>
+            <td>
+                <select name="" class="selectRole" style="border: 0px;background: none;"></select>
+            </td>
+            <td>
+                <button class="btn" onclick="logRowData(this, '${u.id}')">Chỉnh sửa</button>
+                <button class="btn" onclick="deleteUser('${u.id}')">Xóa</button>
+            </td>
         </tr>
     `).join("");
+
+        // Sau khi HTML đã được render, lặp lại từng dòng để gắn option cho select
+        const rows = tbody.querySelectorAll("tr");
+        data.forEach((u, index) => {
+            const selectElement = rows[index].querySelector(".selectRole");
+            render_option(selectElement, u.ma_loai, u.ten_loai);
+        });
     }
 
-    async function fetchProduct() {
-        try {
-            const res = await fetch("http://localhost:8080/api/admin/all_product");
-            if (!res.ok) throw new Error("Lỗi server");
-            product = await res.json();
-            renderProductTable(product);
-        } catch (err) {
-            console.error("Lỗi tải danh sách nhân viên:", err);
-            document.getElementById('staff-body').innerHTML = `
-        <tr><td colspan="5" class="text-danger">Không thể tải dữ liệu nhân viên</td></tr>
-      `;
-        }
+    function render_option(selectElement, ma_loai_selected, ten_loai_selected) {
+        selectElement.innerHTML = '';
+        cate.forEach(u => {
+            const option = document.createElement('option');
+            option.value = u.role_id;
+            option.textContent = u.role_name;
+
+            if (u.role_id === ma_loai_selected && u.role_name === ten_loai_selected) {
+                option.selected = true;
+            }
+
+            selectElement.appendChild(option);
+        });
     }
+    async function fetchProduct() {
+
+        const res = await fetch("http://localhost:8080/api/admin/all_product");
+        if (!res.ok) return alert("Lỗi server");
+        product = await res.json();
+        console.log(product);
+        renderProductTable(product);
+
+    }
+
 
     async function fetchCate() {
         const ls_role = document.getElementById("missionPriority");
@@ -85,7 +121,8 @@
 
         const roles_data = await res.json();
 
-
+        cate = roles_data;
+        console.log(cate);
         ls_role.innerHTML = `<option value="">Chọn loại</option>` +
             roles_data.map(item => `
                 <option value="${item.role_id}">${item.role_name}</option>
@@ -101,7 +138,7 @@
         }
         return result;
     }
-    
+
     document.getElementById("Them").addEventListener("click", function () {
         const roleSelect = document.getElementById("missionPriority")
         const data = {
@@ -127,6 +164,7 @@
                     price: data.don_gia,
                     mota: data.mota,
                     ten_loai: roleSelect.options[roleSelect.selectedIndex].text,
+                    ma_loai: roleSelect.value
                 });
                 renderProductTable(product);
             })
@@ -139,12 +177,14 @@
         if (!confirm("Bạn có chắc chắn muốn cập sản phẩm này?")) return;
         const row = button.closest("tr");
         const [ProductInput, PriceInput, MotaInput] = row.querySelectorAll("input");
-
+        const select = row.querySelector(".selectRole");
+        console.log(select.value);
         const data = {
             id: ids,
             ten: ProductInput.value,
-            price: parseInt( PriceInput.value),
+            price: parseInt(PriceInput.value),
             mota: MotaInput.value,
+            loai_id: select.value
         };
         console.log(data)
         fetch("http://localhost:8080/api/admin/path_product", {
@@ -194,6 +234,6 @@
             });
     }
 
-    document.addEventListener("DOMContentLoaded",fetchProduct(),fetchCate());
+    document.addEventListener("DOMContentLoaded", fetchProduct(), fetchCate());
 
 </script>

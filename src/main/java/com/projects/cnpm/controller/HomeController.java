@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 
+
 @Controller // Đảm bảo có annotation @Controller
 public class HomeController {
 
@@ -56,5 +57,6 @@ public class HomeController {
     public String report() {
         return "report";
     }
+    
     
 }

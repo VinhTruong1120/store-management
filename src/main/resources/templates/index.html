@@ -64,36 +64,39 @@
         </div>
 
         <div id="dynamic-content-area" class="mt-4">
-            <div class="card-section row">
-                <div class="card-total-sale col-md-4"> 
-                    <div class="card text-center border-0 shadow">
-                        <div class="card-header bg-warning text-dark">
-                            <i class="fa-solid fa-dollar-sign"></i> Total Sales
-                        </div>
-                        <div class="card-body bg-dark text-light">
-                            <p>Today: 9.000.000</p>
-                            <p class="text-secondary">Yesterday: 14.500.000</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-orders col-md-4">
-                    <div class="card text-center border-0 shadow">
-                        <div class="card-header bg-primary text-light">
-                            <i class="fa-solid fa-file-invoice"></i> Orders
-                        </div>
-                        <div class="card-body bg-dark text-light">
-                            <p>Today: 103</p>
-                            <p class="text-secondary">Yesterday: 198</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
+        <style>
+        .animated-fadein {
+          animation: fadeInBox 1.2s cubic-bezier(.39,.58,.57,1) both;
+        }
+        @keyframes fadeInBox {
+          0% { opacity: 0; transform: translateY(40px) scale(0.98); }
+          100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .welcome-box:hover {
+          box-shadow: 0 6px 32px 0 #f7b80055, 0 2px 12px rgba(0,0,0,0.10);
+          transform: scale(1.015);
+        }
+        .animated-title {
+          overflow: hidden;
+          white-space: nowrap;
+          border-right: 3px solid #f7b800;
+          animation: typing 2.2s steps(40, end), blink-caret 0.7s step-end infinite;
+        }
+        @keyframes typing {
+          from { width: 0 }
+          to { width: 100% }
+        }
+        @keyframes blink-caret {
+          from, to { border-color: transparent }
+          100% { border-color: #f7b800; }
+        }
+        </style>
      </div>
      <!-- Bootstrap Script -->
      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
      
-     <script src="./scripts/login-logout.js"></script>
-     <script src="./scripts/content-loader.js"></script>
+    <script src="./scripts/login-logout.js"></script>
+    <script src="./scripts/content-loader.js"></script>
 </body>
 </html>

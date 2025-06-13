@@ -8,16 +8,26 @@ public class all_product_DTO {
     private String name;
     private int price;
     private String mota;
+    private String ma_loai;
     private String ten_loai;
-    public all_product_DTO() {
-    }
-    public all_product_DTO(String id, String name, int price, String mota, String ten_loai) {
+    public all_product_DTO(String id, String name, int price, String mota, String ma_loai, String ten_loai) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.mota = mota;
+        this.ma_loai = ma_loai;
         this.ten_loai = ten_loai;
     }
+    public String getMa_loai() {
+        return ma_loai;
+    }
+    public void setMa_loai(String ma_loai) {
+        this.ma_loai = ma_loai;
+    }
+    
+    public all_product_DTO() {
+    }
+    
     public String getId() {
         return id;
     }

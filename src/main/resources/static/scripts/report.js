@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  
+  let chartHienTai = null
+
 
   document.getElementById('filterDate').addEventListener('click', () => {
     const from = document.getElementById('fromDate').value;
@@ -41,10 +42,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const totalRevenue = scores.reduce((sum, val) => sum + val, 0);
 
     console.log("Tổng doanh thu:", totalRevenue);
-
+    
     // Vẽ chart
     const ctx = document.getElementById('reportRevenueChart').getContext('2d');
-    new Chart(ctx, {
+    if(chartHienTai) chartHienTai.destroy();
+    chartHienTai = new Chart(ctx, {
       type: 'bar',
       data: {
         labels: labels,
