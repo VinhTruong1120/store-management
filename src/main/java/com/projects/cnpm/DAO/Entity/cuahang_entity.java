@@ -104,6 +104,8 @@ public class cuahang_entity {
     }
 
    
+    @OneToMany(mappedBy = "cua_hang")
+    List<staff_entity> ds_staff;
 
 
 }

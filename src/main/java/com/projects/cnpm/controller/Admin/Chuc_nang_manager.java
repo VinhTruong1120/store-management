@@ -1,5 +1,6 @@
 package com.projects.cnpm.controller.Admin;
 
+import java.security.SecureRandom;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,26 +8,37 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.projects.cnpm.DAO.Entity.cuahang_entity;
 import com.projects.cnpm.DAO.Entity.don_hang_entity;
 import com.projects.cnpm.DAO.Entity.nhanvien_entity;
+import com.projects.cnpm.DAO.Entity.staff_entity;
 import com.projects.cnpm.Service.chi_tiet_DH_service;
 import com.projects.cnpm.Service.cua_hang_Service;
 import com.projects.cnpm.Service.don_hang_service;
 
 import com.projects.cnpm.Service.nhanvien_service;
-
+import com.projects.cnpm.Service.staff_service;
+import com.projects.cnpm.controller.DTO.all_staff;
 import com.projects.cnpm.controller.requestbody.Doanh_thu_theo_thang;
 import com.projects.cnpm.controller.requestbody.fake_don;
+import com.projects.cnpm.controller.requestbody.staff;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
 
 @RestController
 @RequestMapping("/api/manager")
 public class Chuc_nang_manager extends Chuc_nang_ADMIN_Controller{
+
+    @Autowired
+    private staff_service Staff_service;
 
     @Autowired
     private cua_hang_Service Cua_hang_Service;
@@ -80,4 +92,68 @@ public class Chuc_nang_manager extends Chuc_nang_ADMIN_Controller{
         }
         return "Nhận thành công " + danhSachDon.size() + " đơn hàng.";
     }
+
+    public String generate_staff_ID(){
+        String staff_id = "NV";
+        String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        StringBuilder builder = new StringBuilder(staff_id); // Bắt đầu bằng "NV"
+        SecureRandom random = new SecureRandom();
+        for (int i = 0; i < 8; i++) {
+            int index = random.nextInt(CHARACTERS.length());
+            builder.append(CHARACTERS.charAt(index));
+        }
+
+        staff_id = builder.toString();
+        return staff_id;
+    }
+
+    @PostMapping("tao_staff")
+    public ResponseEntity<?> create_staff(@RequestBody staff request) {
+        cuahang_entity ch = Cua_hang_Service.timTheoId(request.getId_ch());
+        int kt  = Staff_service.create_staff(generate_staff_ID(), request.getHoten(), request.getVitri(), ch, request.getBirthday(), request.getDia_chi());
+        if (kt == 0) {
+            return new ResponseEntity<>("Tạo không thành công",HttpStatus.NOT_ACCEPTABLE);
+        }
+        
+        return ResponseEntity.ok("Tạo thành công");
+    }
+    
+    @DeleteMapping("xoa_staff")
+    public ResponseEntity<?> delete_staff(@RequestParam String id){
+        int kt = Staff_service.del_staff(id);
+        if (kt == 0) {
+            return new ResponseEntity<>("Xoá thất bại",HttpStatus.NOT_FOUND);
+        }
+        return ResponseEntity.ok("xoá thành công");
+    }
+
+    @PostMapping("/lay_staff")
+    public ResponseEntity<?> create_staff() {
+        List<staff_entity> ds_staff = Staff_service.FindAll();
+        
+
+        // String id, String hoten, String vitri, String ch_id, String ten_ch, Timestamp birthday,String dia_chi
+        if (ds_staff.isEmpty()) {
+            return new ResponseEntity<>("load thất bại",HttpStatus.NOT_FOUND);
+        }
+        
+        List<all_staff> ds_res = ds_staff.stream()
+                                        .map(staf -> new all_staff(staf.getId(),staf.getHoten(),
+                                        staf.getVitri(),staf.getCua_hang().getStore_id()
+                                        ,staf.getCua_hang().getTen_cua_hang(),staf.getBirthday(),staf.getDia_chi())).toList();
+
+        return ResponseEntity.ok(ds_res);
+    }
+
+    @PutMapping("/update_staff")
+    public ResponseEntity<?> update_staff(@RequestBody staff request) {
+        cuahang_entity ch = Cua_hang_Service.timTheoId(request.getId_ch());
+        int kt  = Staff_service.update_staff(request.getId(), request.getHoten(), request.getVitri(), ch, request.getBirthday(), request.getDia_chi());
+        if (kt == 0) {
+            return new ResponseEntity<>("Cập nhật không thành công",HttpStatus.NOT_ACCEPTABLE);
+        }
+        
+        return ResponseEntity.ok("Cập nhật thành công");
+    }
+    
 }
