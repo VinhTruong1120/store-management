@@ -5,20 +5,25 @@ import java.sql.Timestamp;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class all_staff {
-     private String id;
+    @JsonProperty("id")
+    private String id;
 
-
+    @JsonProperty("name")
     private String hoten;
 
+    @JsonProperty("position")
     private String vitri;
     
-    
+    @JsonProperty("store_id")
     private String ch_id;
 
+    @JsonProperty("store_name")
     private String ten_ch;
 
+    @JsonProperty("dob")
     private Timestamp birthday;
 
+    @JsonProperty("address")
     private String dia_chi;
 
     public String getId() {
