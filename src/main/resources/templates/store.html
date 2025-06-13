@@ -17,16 +17,6 @@
                     <label for="storeAddress">Địa chỉ</label>
                     <input type="text" id="storeAddress" placeholder="Nhập địa chỉ" class="form-control-custom">
                 </div>
-                <div class="form-group">
-                    <label for="storePhone">Số điện thoại</label>
-                    <input type="text" id="storePhone" placeholder="Nhập số điện thoại" class="form-control-custom">
-                </div>
-                <div class="form-group">
-                    <label for="storeManager">Quản lý</label>
-                    <select id="storeManager" class="form-control-custom">
-                        <option value="Chọn quản lý"></option>
-                    </select>
-                </div>
             </div>
             <div class="form-actions">
                 <button class="btn btn-success" id="Them">➕ Thêm cửa hàng</button>
@@ -150,8 +140,7 @@
                 store.push({
                     store_id: data.store_id,
                     ten_cua_hang: data.ten_ch,
-                    dia_chi: data.dia_chi,
-                    contact: data.contact[0]
+                    dia_chi: data.dia_chi
                 });
                 renderStoreTable(store);
             })
