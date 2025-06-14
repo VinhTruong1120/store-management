@@ -150,7 +150,7 @@ function createFilterUI() {
             <input id="filter-name" type="text" placeholder="Lọc theo tên nhân viên..." style="padding:4px 8px; border-radius:5px; border:1px solid #bbb;">
             <select id="filter-position" style="padding:4px 8px; border-radius:5px; border:1px solid #bbb;">
                 <option value="">Tất cả vị trí</option>
-                <option value="Nhân viên quản lý cửa hàng">Nhân viên quản lý cửa hàng</option>
+                
                 <option value="Nhân viên thu ngân">Nhân viên thu ngân</option>
                 <option value="Nhân viên phục vụ">Nhân viên phục vụ</option>
                 <option value="Nhân viên pha chế">Nhân viên pha chế</option>

@@ -49,14 +49,24 @@ function showDashboard() {
             document.querySelector(".nav-goods")?.classList.add("d-none");
             document.querySelector(".nav-staff")?.classList.add("d-none");
             document.querySelector(".nav-after-sale")?.classList.add("d-none");
+            document.querySelector(".nav-manager")?.classList.add("d-none");
+            document.querySelector(".nav-store")?.classList.add("d-none");
+            document.querySelector(".nav-product")?.classList.add("d-none");
+            document.querySelector(".nav-report")?.classList.add("d-none");
+        }
+
+        if (user.role === "manager") {
+            document.querySelector(".nav-manager")?.classList.add("d-none");
+            document.querySelector(".nav-store")?.classList.add("d-none");
+            document.querySelector(".nav-product")?.classList.add("d-none");
         }
     }
 }
 
 
 function logout() {
-    localStorage.removeItem("loggedInUser");
-    location.reload();
+    window.localStorage.removeItem("loggedInUser");
+    window.location.href = '/index.html';
 }
 
 window.addEventListener("DOMContentLoaded", () => {
