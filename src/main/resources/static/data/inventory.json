@@ -8,8 +8,56 @@
     {
       "id": 2,
       "product": "Black Tea",
-      "Unit of Measure": "Box",
+      "Unit of Measure": "box",
       "Quantity": 20
+    },
+    {
+      "id": 3,
+      "product": "Coffee",
+      "Unit of Measure": "kg",
+      "Quantity": 15
+    },
+    {
+      "id": 4,
+      "product": "Rice",
+      "Unit of Measure": "kg",
+      "Quantity": 25
+    },
+    {
+      "id": 5,
+      "product": "Flour",
+      "Unit of Measure": "kg",
+      "Quantity": 30
+    },
+    {
+      "id": 6,
+      "product": "Salt",
+      "Unit of Measure": "kg",
+      "Quantity": 5
+    },
+    {
+      "id": 7,
+      "product": "Cooking Oil",
+      "Unit of Measure": "litre",
+      "Quantity": 12
+    },
+    {
+      "id": 8,
+      "product": "Butter",
+      "Unit of Measure": "kg",
+      "Quantity": 8
+    },
+    {
+      "id": 9,
+      "product": "Eggs",
+      "Unit of Measure": "dozen",
+      "Quantity": 6
+    },
+    {
+      "id": 10,
+      "product": "Milk Powder",
+      "Unit of Measure": "kg",
+      "Quantity": 4
     }
   ]
   

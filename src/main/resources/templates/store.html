@@ -150,7 +150,7 @@
     })
 
     function logRowData(button, ids) {
-        if (!confirm("Bạn có chắc chắn muốn cập nhật nhân viên này?")) return;
+        if (!confirm("Bạn có chắc chắn muốn cập nhật cửa hàng này?")) return;
         const row = button.closest("tr");
         const [ ten_cua_hangInput, dia_chiInput] = row.querySelectorAll("input");
 
@@ -185,7 +185,7 @@
     }
 
     function deleteStore(Store_id) {
-        if (!confirm("Bạn có chắc chắn muốn xoá nhân viên này?")) return;
+        if (!confirm("Bạn có chắc chắn muốn xoá cửa hàng này?")) return;
         
         console.log(Store_id);
         fetch(`http://localhost:8080/api/admin/xoa_cua_hang?Store_id=${Store_id}`, {
