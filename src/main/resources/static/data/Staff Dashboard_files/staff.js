@@ -109,10 +109,6 @@ function convertToDOB(dateString) {
         return dateString;
     }
 }
-function formatDate(dateString) {
-  const [year, month, day] = dateString.split("-");
-  return `${day}-${month}-${year}`;
-}
 function xoa_staff(id) {
     if (!confirm("Bạn có muốn xoá nhân viên này?")) return;
 
@@ -218,7 +214,7 @@ function renderStaffTable() {
             <td>${staff.name}</td>
             <td>${staff.position}</td>
             <td>${staff.address}</td>
-            <td>${formatDate(staff.dob)}</td>
+            <td>${staff.dob}</td>
             <td>${staff.store}</td>
             <td>
                 <button class="btn btn-sm btn-primary" onclick="editStaff(${staffData.indexOf(staff)})">Chỉnh sửa</button>
