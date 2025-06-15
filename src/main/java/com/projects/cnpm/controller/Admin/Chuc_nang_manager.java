@@ -237,32 +237,31 @@ public class Chuc_nang_manager extends Chuc_nang_ADMIN_Controller {
 
     @PostMapping("/them_nhieu_sp")
     public ResponseEntity<?> themNhieuSanPham(@RequestBody List<san_pham_moi_request> requests) {
-    List<String> errors = new ArrayList<>();
+        List<String> errors = new ArrayList<>();
 
-    for (san_pham_moi_request request : requests) {
-        if (San_pham_service.kiemTraTonTai(request.getMa_sp())) {
-            errors.add("Sản phẩm với mã " + request.getMa_sp() + " đã tồn tại.");
-            continue;
+        for (san_pham_moi_request request : requests) {
+            if (San_pham_service.kiemTraTonTai(request.getMa_sp())) {
+                errors.add("Sản phẩm với mã " + request.getMa_sp() + " đã tồn tại.");
+                continue;
+            }
+
+            if (!Loai_sp_service.kiemTraTonTai(request.getMa_loai())) {
+                errors.add("Loại sản phẩm với mã " + request.getMa_loai() + " không tồn tại.");
+                continue;
+            }
+
+            San_pham_service.them_san_pham(
+                    request.getMa_sp(),
+                    request.getTen_sp(),
+                    request.getDon_gia(),
+                    request.getMota(),
+                    Loai_sp_service.timTheoId(request.getMa_loai()));
         }
 
-        if (!Loai_sp_service.kiemTraTonTai(request.getMa_loai())) {
-            errors.add("Loại sản phẩm với mã " + request.getMa_loai() + " không tồn tại.");
-            continue;
+        if (!errors.isEmpty()) {
+            return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
         }
 
-        San_pham_service.them_san_pham(
-            request.getMa_sp(),
-            request.getTen_sp(),
-            request.getDon_gia(),
-            request.getMota(),
-            Loai_sp_service.timTheoId(request.getMa_loai())
-        );
+        return new ResponseEntity<>("Thêm tất cả sản phẩm thành công", HttpStatus.OK);
     }
-
-    if (!errors.isEmpty()) {
-        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
-    }
-
-    return new ResponseEntity<>("Thêm tất cả sản phẩm thành công", HttpStatus.OK);
-}
 }
