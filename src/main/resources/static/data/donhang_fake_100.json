@@ -1,0 +1,802 @@
+[
+  {
+    "ID": "DH00000200",
+    "ngay_nhan": "2025-06-09T08:39:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE200",
+    "nv": "NV0001",
+    "thanh_tien": 1965101
+  },
+  {
+    "ID": "DH00000201",
+    "ngay_nhan": "2025-06-08T16:37:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE200",
+    "nv": "NV0001",
+    "thanh_tien": 1273953
+  },
+  {
+    "ID": "DH00000202",
+    "ngay_nhan": "2025-06-03T21:35:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE200",
+    "nv": "NV0001",
+    "thanh_tien": 4602974
+  },
+  {
+    "ID": "DH00000203",
+    "ngay_nhan": "2025-06-12T09:15:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE200",
+    "nv": "NV0001",
+    "thanh_tien": 3676797
+  },
+  {
+    "ID": "DH00000204",
+    "ngay_nhan": "2025-06-12T15:14:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE200",
+    "nv": "NV0001",
+    "thanh_tien": 2901287
+  },
+  {
+    "ID": "DH00000205",
+    "ngay_nhan": "2025-06-04T02:43:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE200",
+    "nv": "NV0001",
+    "thanh_tien": 3711402
+  },
+  {
+    "ID": "DH00000206",
+    "ngay_nhan": "2025-06-09T19:32:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE200",
+    "nv": "NV0001",
+    "thanh_tien": 4088014
+  },
+  {
+    "ID": "DH00000207",
+    "ngay_nhan": "2025-06-08T13:53:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE200",
+    "nv": "NV0001",
+    "thanh_tien": 2038951
+  },
+  {
+    "ID": "DH00000208",
+    "ngay_nhan": "2025-06-15T14:14:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE200",
+    "nv": "NV0001",
+    "thanh_tien": 1794365
+  },
+  {
+    "ID": "DH00000209",
+    "ngay_nhan": "2025-06-03T14:40:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE200",
+    "nv": "NV0001",
+    "thanh_tien": 2406718
+  },
+  {
+    "ID": "DH00000210",
+    "ngay_nhan": "2025-06-03T14:43:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE201",
+    "nv": "NV0001",
+    "thanh_tien": 2229202
+  },
+  {
+    "ID": "DH00000211",
+    "ngay_nhan": "2025-06-04T17:00:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE201",
+    "nv": "NV0001",
+    "thanh_tien": 1399418
+  },
+  {
+    "ID": "DH00000212",
+    "ngay_nhan": "2025-06-11T02:24:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE201",
+    "nv": "NV0001",
+    "thanh_tien": 2729885
+  },
+  {
+    "ID": "DH00000213",
+    "ngay_nhan": "2025-06-10T06:45:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE201",
+    "nv": "NV0001",
+    "thanh_tien": 1872550
+  },
+  {
+    "ID": "DH00000214",
+    "ngay_nhan": "2025-06-04T09:12:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE201",
+    "nv": "NV0001",
+    "thanh_tien": 4274204
+  },
+  {
+    "ID": "DH00000215",
+    "ngay_nhan": "2025-06-13T21:03:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE201",
+    "nv": "NV0001",
+    "thanh_tien": 4155569
+  },
+  {
+    "ID": "DH00000216",
+    "ngay_nhan": "2025-06-13T06:06:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE201",
+    "nv": "NV0001",
+    "thanh_tien": 952444
+  },
+  {
+    "ID": "DH00000217",
+    "ngay_nhan": "2025-06-15T10:12:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE201",
+    "nv": "NV0001",
+    "thanh_tien": 4516139
+  },
+  {
+    "ID": "DH00000218",
+    "ngay_nhan": "2025-06-10T19:41:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE201",
+    "nv": "NV0001",
+    "thanh_tien": 4556818
+  },
+  {
+    "ID": "DH00000219",
+    "ngay_nhan": "2025-06-07T14:56:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE201",
+    "nv": "NV0001",
+    "thanh_tien": 4847416
+  },
+  {
+    "ID": "DH00000220",
+    "ngay_nhan": "2025-06-13T12:44:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE202",
+    "nv": "NV0001",
+    "thanh_tien": 3644125
+  },
+  {
+    "ID": "DH00000221",
+    "ngay_nhan": "2025-06-14T05:05:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE202",
+    "nv": "NV0001",
+    "thanh_tien": 3101989
+  },
+  {
+    "ID": "DH00000222",
+    "ngay_nhan": "2025-06-04T07:44:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE202",
+    "nv": "NV0001",
+    "thanh_tien": 515094
+  },
+  {
+    "ID": "DH00000223",
+    "ngay_nhan": "2025-06-10T00:31:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE202",
+    "nv": "NV0001",
+    "thanh_tien": 1346798
+  },
+  {
+    "ID": "DH00000224",
+    "ngay_nhan": "2025-06-09T22:36:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE202",
+    "nv": "NV0001",
+    "thanh_tien": 4979244
+  },
+  {
+    "ID": "DH00000225",
+    "ngay_nhan": "2025-06-09T21:09:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE202",
+    "nv": "NV0001",
+    "thanh_tien": 804611
+  },
+  {
+    "ID": "DH00000226",
+    "ngay_nhan": "2025-06-05T22:01:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE202",
+    "nv": "NV0001",
+    "thanh_tien": 3948939
+  },
+  {
+    "ID": "DH00000227",
+    "ngay_nhan": "2025-06-10T02:47:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE202",
+    "nv": "NV0001",
+    "thanh_tien": 4420386
+  },
+  {
+    "ID": "DH00000228",
+    "ngay_nhan": "2025-06-10T08:21:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE202",
+    "nv": "NV0001",
+    "thanh_tien": 3041148
+  },
+  {
+    "ID": "DH00000229",
+    "ngay_nhan": "2025-06-04T16:32:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE202",
+    "nv": "NV0001",
+    "thanh_tien": 4998521
+  },
+  {
+    "ID": "DH00000230",
+    "ngay_nhan": "2025-06-09T20:03:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE203",
+    "nv": "NV0001",
+    "thanh_tien": 2331758
+  },
+  {
+    "ID": "DH00000231",
+    "ngay_nhan": "2025-06-10T15:28:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE203",
+    "nv": "NV0001",
+    "thanh_tien": 3468454
+  },
+  {
+    "ID": "DH00000232",
+    "ngay_nhan": "2025-06-11T07:23:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE203",
+    "nv": "NV0001",
+    "thanh_tien": 4943338
+  },
+  {
+    "ID": "DH00000233",
+    "ngay_nhan": "2025-06-10T21:07:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE203",
+    "nv": "NV0001",
+    "thanh_tien": 3042731
+  },
+  {
+    "ID": "DH00000234",
+    "ngay_nhan": "2025-06-15T04:13:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE203",
+    "nv": "NV0001",
+    "thanh_tien": 2311758
+  },
+  {
+    "ID": "DH00000235",
+    "ngay_nhan": "2025-06-06T18:03:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE203",
+    "nv": "NV0001",
+    "thanh_tien": 2356017
+  },
+  {
+    "ID": "DH00000236",
+    "ngay_nhan": "2025-06-05T23:23:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE203",
+    "nv": "NV0001",
+    "thanh_tien": 4618405
+  },
+  {
+    "ID": "DH00000237",
+    "ngay_nhan": "2025-06-04T06:51:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE203",
+    "nv": "NV0001",
+    "thanh_tien": 1352980
+  },
+  {
+    "ID": "DH00000238",
+    "ngay_nhan": "2025-06-11T18:00:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE203",
+    "nv": "NV0001",
+    "thanh_tien": 3316243
+  },
+  {
+    "ID": "DH00000239",
+    "ngay_nhan": "2025-06-10T23:11:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE203",
+    "nv": "NV0001",
+    "thanh_tien": 893285
+  },
+  {
+    "ID": "DH00000240",
+    "ngay_nhan": "2025-06-03T00:58:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE204",
+    "nv": "NV0001",
+    "thanh_tien": 4956547
+  },
+  {
+    "ID": "DH00000241",
+    "ngay_nhan": "2025-06-07T23:43:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE204",
+    "nv": "NV0001",
+    "thanh_tien": 2530350
+  },
+  {
+    "ID": "DH00000242",
+    "ngay_nhan": "2025-06-11T18:17:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE204",
+    "nv": "NV0001",
+    "thanh_tien": 2851488
+  },
+  {
+    "ID": "DH00000243",
+    "ngay_nhan": "2025-06-09T17:05:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE204",
+    "nv": "NV0001",
+    "thanh_tien": 630143
+  },
+  {
+    "ID": "DH00000244",
+    "ngay_nhan": "2025-06-11T16:08:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE204",
+    "nv": "NV0001",
+    "thanh_tien": 542600
+  },
+  {
+    "ID": "DH00000245",
+    "ngay_nhan": "2025-06-10T12:05:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE204",
+    "nv": "NV0001",
+    "thanh_tien": 1079747
+  },
+  {
+    "ID": "DH00000246",
+    "ngay_nhan": "2025-06-02T04:57:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE204",
+    "nv": "NV0001",
+    "thanh_tien": 4603022
+  },
+  {
+    "ID": "DH00000247",
+    "ngay_nhan": "2025-06-04T21:19:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE204",
+    "nv": "NV0001",
+    "thanh_tien": 4599631
+  },
+  {
+    "ID": "DH00000248",
+    "ngay_nhan": "2025-06-07T16:32:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE204",
+    "nv": "NV0001",
+    "thanh_tien": 3792266
+  },
+  {
+    "ID": "DH00000249",
+    "ngay_nhan": "2025-06-12T04:44:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE204",
+    "nv": "NV0001",
+    "thanh_tien": 2411698
+  },
+  {
+    "ID": "DH00000250",
+    "ngay_nhan": "2025-06-06T01:39:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE205",
+    "nv": "NV0001",
+    "thanh_tien": 1056652
+  },
+  {
+    "ID": "DH00000251",
+    "ngay_nhan": "2025-06-02T01:28:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE205",
+    "nv": "NV0001",
+    "thanh_tien": 3187804
+  },
+  {
+    "ID": "DH00000252",
+    "ngay_nhan": "2025-06-05T15:57:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE205",
+    "nv": "NV0001",
+    "thanh_tien": 4015907
+  },
+  {
+    "ID": "DH00000253",
+    "ngay_nhan": "2025-06-03T19:24:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE205",
+    "nv": "NV0001",
+    "thanh_tien": 3099882
+  },
+  {
+    "ID": "DH00000254",
+    "ngay_nhan": "2025-06-04T15:51:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE205",
+    "nv": "NV0001",
+    "thanh_tien": 4579781
+  },
+  {
+    "ID": "DH00000255",
+    "ngay_nhan": "2025-06-08T01:52:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE205",
+    "nv": "NV0001",
+    "thanh_tien": 3595825
+  },
+  {
+    "ID": "DH00000256",
+    "ngay_nhan": "2025-06-02T18:54:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE205",
+    "nv": "NV0001",
+    "thanh_tien": 3651601
+  },
+  {
+    "ID": "DH00000257",
+    "ngay_nhan": "2025-06-03T22:12:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE205",
+    "nv": "NV0001",
+    "thanh_tien": 1844307
+  },
+  {
+    "ID": "DH00000258",
+    "ngay_nhan": "2025-06-14T16:27:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE205",
+    "nv": "NV0001",
+    "thanh_tien": 1112101
+  },
+  {
+    "ID": "DH00000259",
+    "ngay_nhan": "2025-06-14T03:58:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE205",
+    "nv": "NV0001",
+    "thanh_tien": 3391697
+  },
+  {
+    "ID": "DH00000260",
+    "ngay_nhan": "2025-06-02T15:25:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE206",
+    "nv": "NV0001",
+    "thanh_tien": 2896580
+  },
+  {
+    "ID": "DH00000261",
+    "ngay_nhan": "2025-06-02T17:49:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE206",
+    "nv": "NV0001",
+    "thanh_tien": 3315512
+  },
+  {
+    "ID": "DH00000262",
+    "ngay_nhan": "2025-06-13T05:14:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE206",
+    "nv": "NV0001",
+    "thanh_tien": 2009859
+  },
+  {
+    "ID": "DH00000263",
+    "ngay_nhan": "2025-06-13T15:37:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE206",
+    "nv": "NV0001",
+    "thanh_tien": 4873968
+  },
+  {
+    "ID": "DH00000264",
+    "ngay_nhan": "2025-06-15T14:57:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE206",
+    "nv": "NV0001",
+    "thanh_tien": 524806
+  },
+  {
+    "ID": "DH00000265",
+    "ngay_nhan": "2025-06-15T13:16:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE206",
+    "nv": "NV0001",
+    "thanh_tien": 3120969
+  },
+  {
+    "ID": "DH00000266",
+    "ngay_nhan": "2025-06-14T05:58:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE206",
+    "nv": "NV0001",
+    "thanh_tien": 3375325
+  },
+  {
+    "ID": "DH00000267",
+    "ngay_nhan": "2025-06-13T17:25:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE206",
+    "nv": "NV0001",
+    "thanh_tien": 4728457
+  },
+  {
+    "ID": "DH00000268",
+    "ngay_nhan": "2025-06-10T16:43:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE206",
+    "nv": "NV0001",
+    "thanh_tien": 1416119
+  },
+  {
+    "ID": "DH00000269",
+    "ngay_nhan": "2025-06-01T18:22:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE206",
+    "nv": "NV0001",
+    "thanh_tien": 586664
+  },
+  {
+    "ID": "DH00000270",
+    "ngay_nhan": "2025-06-06T20:12:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE207",
+    "nv": "NV0001",
+    "thanh_tien": 1379135
+  },
+  {
+    "ID": "DH00000271",
+    "ngay_nhan": "2025-06-09T03:22:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE207",
+    "nv": "NV0001",
+    "thanh_tien": 3822809
+  },
+  {
+    "ID": "DH00000272",
+    "ngay_nhan": "2025-06-02T20:21:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE207",
+    "nv": "NV0001",
+    "thanh_tien": 4654303
+  },
+  {
+    "ID": "DH00000273",
+    "ngay_nhan": "2025-06-07T09:42:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE207",
+    "nv": "NV0001",
+    "thanh_tien": 4184397
+  },
+  {
+    "ID": "DH00000274",
+    "ngay_nhan": "2025-06-14T01:07:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE207",
+    "nv": "NV0001",
+    "thanh_tien": 2217234
+  },
+  {
+    "ID": "DH00000275",
+    "ngay_nhan": "2025-06-14T09:48:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE207",
+    "nv": "NV0001",
+    "thanh_tien": 3586739
+  },
+  {
+    "ID": "DH00000276",
+    "ngay_nhan": "2025-06-06T06:13:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE207",
+    "nv": "NV0001",
+    "thanh_tien": 4859428
+  },
+  {
+    "ID": "DH00000277",
+    "ngay_nhan": "2025-06-03T17:12:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE207",
+    "nv": "NV0001",
+    "thanh_tien": 1867207
+  },
+  {
+    "ID": "DH00000278",
+    "ngay_nhan": "2025-06-10T02:38:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE207",
+    "nv": "NV0001",
+    "thanh_tien": 4099194
+  },
+  {
+    "ID": "DH00000279",
+    "ngay_nhan": "2025-06-03T03:58:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE207",
+    "nv": "NV0001",
+    "thanh_tien": 4117942
+  },
+  {
+    "ID": "DH00000280",
+    "ngay_nhan": "2025-06-09T01:07:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE208",
+    "nv": "NV0001",
+    "thanh_tien": 1883733
+  },
+  {
+    "ID": "DH00000281",
+    "ngay_nhan": "2025-06-03T14:17:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE208",
+    "nv": "NV0001",
+    "thanh_tien": 2635198
+  },
+  {
+    "ID": "DH00000282",
+    "ngay_nhan": "2025-06-01T21:19:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE208",
+    "nv": "NV0001",
+    "thanh_tien": 3010696
+  },
+  {
+    "ID": "DH00000283",
+    "ngay_nhan": "2025-06-12T22:38:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE208",
+    "nv": "NV0001",
+    "thanh_tien": 2562609
+  },
+  {
+    "ID": "DH00000284",
+    "ngay_nhan": "2025-06-07T10:20:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE208",
+    "nv": "NV0001",
+    "thanh_tien": 1365658
+  },
+  {
+    "ID": "DH00000285",
+    "ngay_nhan": "2025-06-07T13:03:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE208",
+    "nv": "NV0001",
+    "thanh_tien": 4072913
+  },
+  {
+    "ID": "DH00000286",
+    "ngay_nhan": "2025-06-07T23:26:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE208",
+    "nv": "NV0001",
+    "thanh_tien": 2288547
+  },
+  {
+    "ID": "DH00000287",
+    "ngay_nhan": "2025-06-12T18:24:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE208",
+    "nv": "NV0001",
+    "thanh_tien": 3955341
+  },
+  {
+    "ID": "DH00000288",
+    "ngay_nhan": "2025-06-03T07:31:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE208",
+    "nv": "NV0001",
+    "thanh_tien": 2827328
+  },
+  {
+    "ID": "DH00000289",
+    "ngay_nhan": "2025-06-15T08:53:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE208",
+    "nv": "NV0001",
+    "thanh_tien": 1533111
+  },
+  {
+    "ID": "DH00000290",
+    "ngay_nhan": "2025-06-06T10:01:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE209",
+    "nv": "NV0001",
+    "thanh_tien": 4344095
+  },
+  {
+    "ID": "DH00000291",
+    "ngay_nhan": "2025-06-13T23:42:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE209",
+    "nv": "NV0001",
+    "thanh_tien": 3995992
+  },
+  {
+    "ID": "DH00000292",
+    "ngay_nhan": "2025-06-03T04:49:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE209",
+    "nv": "NV0001",
+    "thanh_tien": 3629782
+  },
+  {
+    "ID": "DH00000293",
+    "ngay_nhan": "2025-06-10T12:53:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE209",
+    "nv": "NV0001",
+    "thanh_tien": 999224
+  },
+  {
+    "ID": "DH00000294",
+    "ngay_nhan": "2025-06-07T05:40:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE209",
+    "nv": "NV0001",
+    "thanh_tien": 2276514
+  },
+  {
+    "ID": "DH00000295",
+    "ngay_nhan": "2025-06-14T19:59:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE209",
+    "nv": "NV0001",
+    "thanh_tien": 2344655
+  },
+  {
+    "ID": "DH00000296",
+    "ngay_nhan": "2025-06-04T09:40:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE209",
+    "nv": "NV0001",
+    "thanh_tien": 3246420
+  },
+  {
+    "ID": "DH00000297",
+    "ngay_nhan": "2025-06-05T14:47:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE209",
+    "nv": "NV0001",
+    "thanh_tien": 2703689
+  },
+  {
+    "ID": "DH00000298",
+    "ngay_nhan": "2025-06-05T06:07:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE209",
+    "nv": "NV0001",
+    "thanh_tien": 3815373
+  },
+  {
+    "ID": "DH00000299",
+    "ngay_nhan": "2025-06-15T06:42:00",
+    "trang_thai": "Đã giao",
+    "cuahang": "STORE209",
+    "nv": "NV0001",
+    "thanh_tien": 4781767
+  }
+]
