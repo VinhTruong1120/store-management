@@ -157,9 +157,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 console.log(body);
                 body.innerHTML = "";
                 responseData.forEach((row) => {
-
-                    const tr = document.createElement("tr");
-                    tr.innerHTML = `
+                    const time = new Date(row.ngay_nhan);
+                    if (
+                        time >= fromDateBill &&
+                        time <= toDateBill &&
+                        (!storeSelect || row.cuahang === storeSelect)
+                    ) {
+                        const tr = document.createElement("tr");
+                        tr.innerHTML = `
                     <td>${row.id}</td>
                     <td>${row.nv_id}</td>
                     <td>${formatDateTime(row.ngay)}</td>
