@@ -11,6 +11,7 @@ import javax.swing.text.html.HTML;
 
 import com.projects.cnpm.controller.DTO.ALL_role_DTO;
 import com.projects.cnpm.controller.DTO.CH_DTO;
+import com.projects.cnpm.controller.DTO.DH_DTO;
 import com.projects.cnpm.controller.DTO.NV_DTO;
 import com.projects.cnpm.controller.DTO.Role_DTO;
 import com.projects.cnpm.controller.DTO.all_product_DTO;
@@ -72,14 +73,13 @@ public class Chuc_nang_ADMIN_Controller {
     public ResponseEntity<?> getMethodName() {
         List<loai_sp_entity> all_loai = Loai_sp_service.FindAll();
         if (all_loai.isEmpty()) {
-            return new ResponseEntity<>("Load sản phẩm thất bại",HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("Load sản phẩm thất bại", HttpStatus.NOT_FOUND);
         }
         List<ALL_role_DTO> ls_loai = all_loai.stream()
-                                .map(loai -> new ALL_role_DTO(loai.getMa_loai(), loai.getTen_loai()))
-                                .toList();
+                .map(loai -> new ALL_role_DTO(loai.getMa_loai(), loai.getTen_loai()))
+                .toList();
         return ResponseEntity.ok(ls_loai);
     }
-    
 
     @GetMapping("/all_product")
     public ResponseEntity<?> all_product() {
@@ -87,15 +87,15 @@ public class Chuc_nang_ADMIN_Controller {
         if (all_product.isEmpty()) {
             return new ResponseEntity<>("Không có sản phẩm ", HttpStatus.NOT_FOUND);
         }
-        
+
         List<all_product_DTO> ls_product = all_product.stream()
-                                                        .map(product -> new all_product_DTO(product.getMa_sp(),
-                                                        product.getTen_sp(),
-                                                        product.getDon_gia(),
-                                                        product.getMo_ta_sp(),
-                                                        product.getLoai().getMa_loai(),
-                                                        product.getLoai().getTen_loai()))
-                                                        .toList();
+                .map(product -> new all_product_DTO(product.getMa_sp(),
+                        product.getTen_sp(),
+                        product.getDon_gia(),
+                        product.getMo_ta_sp(),
+                        product.getLoai().getMa_loai(),
+                        product.getLoai().getTen_loai()))
+                .toList();
         return ResponseEntity.ok(ls_product);
     }
 
@@ -347,7 +347,6 @@ public class Chuc_nang_ADMIN_Controller {
         return new ResponseEntity<>("Huỷ thất bại", HttpStatus.BAD_REQUEST);
     }
 
-
     @PostMapping("/doanh_thu_x_den_y")
     public ResponseEntity<?> doanh_thu_x_den_y(@RequestBody Doanh_thu_tu_ngay_x_den_y request) {
         if (request.getNgay_bat_dau() == null || request.getNgay_kt() == null) {
@@ -376,20 +375,38 @@ public class Chuc_nang_ADMIN_Controller {
     }
 
     @PatchMapping("/path_product")
-    public ResponseEntity<?> path_product(@RequestBody path_product request){
+    public ResponseEntity<?> path_product(@RequestBody path_product request) {
         int kt = San_pham_service.patch_product(request);
         if (kt == 0) {
-            return new ResponseEntity<>("cập nhật thất bại",HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("cập nhật thất bại", HttpStatus.NOT_FOUND);
         }
         return ResponseEntity.ok("Cập nhật thành công");
     }
 
     @DeleteMapping("/del_product")
-    public ResponseEntity<?> del_product(@RequestParam String id){
+    public ResponseEntity<?> del_product(@RequestParam String id) {
         int kt = San_pham_service.del_product(id);
         if (kt == 0) {
-            return new ResponseEntity<>("cập nhật thất bại",HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("cập nhật thất bại", HttpStatus.NOT_FOUND);
         }
         return ResponseEntity.ok("Xoá thành công");
     }
+
+    @PostMapping("/Lich_su_cac_don")
+    public ResponseEntity<?> lich_su_cac_don(@RequestBody Lich_su_don request) {
+        List<DH_DTO> ds_don;
+        
+            List<don_hang_entity> ls = Don_hang_service.lich_su_don_hang(request.getNgay_bd(), request.getNgay_kt(),
+                    request.getStore_id());
+            ds_don = ls.stream().map(
+                    don -> new DH_DTO(don.getMa_don(), don.getNv().getTen(), don.getNgay_nhan(),
+                            don.getStore().getTen_cua_hang()))
+                    .toList();
+        
+        if (ds_don.isEmpty()) {
+            return new ResponseEntity<>("Không tìm thấy lịch sử đơn", HttpStatus.NOT_FOUND);
+        }
+        return ResponseEntity.ok(ds_don);
+    }
+
 }

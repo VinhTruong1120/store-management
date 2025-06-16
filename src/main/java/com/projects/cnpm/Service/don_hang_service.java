@@ -66,4 +66,8 @@ public class don_hang_service extends BaseSerive<don_hang_entity,String,don_hang
     public List<doanh_thu_x_y_DTO> doanh_thu_xx_den_yy() {
        return repositoty.thanh_tien_theo_ngay_nhan();
     }
+
+    public List<don_hang_entity> lich_su_don_hang(Timestamp ngay_bd,Timestamp ngay_kt,String Store_ID){
+        return repositoty.lich_su_don_hang(ngay_bd, ngay_kt, Store_ID);
+    }
 }

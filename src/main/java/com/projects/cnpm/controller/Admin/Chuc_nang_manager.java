@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.projects.cnpm.DAO.Entity.cuahang_entity;
 import com.projects.cnpm.DAO.Entity.don_hang_entity;
 import com.projects.cnpm.DAO.Entity.nhanvien_entity;
+import com.projects.cnpm.DAO.Entity.san_pham_entity;
 import com.projects.cnpm.DAO.Entity.staff_entity;
+import com.projects.cnpm.DAO.Entity.Embeddable.CTDH_ID;
 import com.projects.cnpm.Service.chi_tiet_DH_service;
 import com.projects.cnpm.Service.cua_hang_Service;
 import com.projects.cnpm.Service.don_hang_service;
@@ -28,6 +30,7 @@ import com.projects.cnpm.Service.nhanvien_service;
 import com.projects.cnpm.Service.san_pham_service;
 import com.projects.cnpm.Service.staff_service;
 import com.projects.cnpm.controller.DTO.all_staff;
+import com.projects.cnpm.controller.requestbody.CTDH_request;
 import com.projects.cnpm.controller.requestbody.Doanh_thu_theo_thang;
 import com.projects.cnpm.controller.requestbody.fake_don;
 import com.projects.cnpm.controller.requestbody.san_pham_moi_request;
@@ -264,4 +267,22 @@ public class Chuc_nang_manager extends Chuc_nang_ADMIN_Controller {
 
         return new ResponseEntity<>("Thêm tất cả sản phẩm thành công", HttpStatus.OK);
     }
+
+    @PostMapping("/them_nhieu_CTDH")
+    public ResponseEntity fake_100_CTDH(@RequestBody List<CTDH_request> requests) {
+        for (CTDH_request ctdh_request : requests) {
+            System.out.println(ctdh_request.getMa_dh());
+            System.out.println(ctdh_request.getMa_sp());
+            don_hang_entity dh = Don_hang_service.timTheoId(ctdh_request.getMa_dh());
+            san_pham_entity sp = San_pham_service.timTheoId(ctdh_request.getMa_sp());
+            System.out.println(sp);
+            System.out.println(dh);
+            CTDH_ID id = new CTDH_ID();
+            id.setDon_hang(dh);
+            id.setSan_pham(sp);
+            Chi_tiet_DH_service.them_chi_tiet_DH(id, ctdh_request.getSo_luong());
+        }
+        return ResponseEntity.ok("thêm thành công");
+    }
+    
 }
