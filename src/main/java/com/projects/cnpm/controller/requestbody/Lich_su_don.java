@@ -2,12 +2,11 @@ package com.projects.cnpm.controller.requestbody;
 
 import java.sql.Timestamp;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class Lich_su_don {
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+   
     private Timestamp ngay_bd;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    
     private Timestamp ngay_kt;
     private String store_id;
     public Lich_su_don() {

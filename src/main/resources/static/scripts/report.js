@@ -135,31 +135,24 @@ document.addEventListener("DOMContentLoaded", () => {
         toDateBill.setHours(23, 59, 59);
 
         const data = {
-            ngay_bat_dau: fromDateBill,
+            ngay_bd: fromDateBill,
             ngay_kt: toDateBill,
             store_id: storeSelect || null,
         };
 
-        fetch(
-            "./data/donhang_fake_100.json" // Quốc làm xong api gọi ngày xem bill thì đổi link API vô dòng này + mở comment các dàng ở dưới cho anh
-
-            //// Các dòng này nha
-
-            //     , {
-            //     method: "POST",
-            //     headers: {
-            //         "Content-Type": "application/json",
-            //     },
-            //     body: JSON.stringify(data),
-            // }
-        )
-            //// Mấy dòng này cũng mở ra nha
-            // .then((res) => {
-            //     if (!res.ok) throw new Error("Lỗi không tải được json");
-            //     return res.json();
-            // })
-            .then((res) => res.json()) //// còn dòng này thì làm xong API thì đóng nó lại
+        fetch("http://localhost:8080/api/admin/Lich_su_cac_don", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        })
+            .then((res) => {
+                if (!res.ok) throw new Error("Lỗi không tải được json");
+                return res.json(); // ✅ chỉ một lần duy nhất ở đây
+            })
             .then((responseData) => {
+                console.log(responseData); // Kiểm tra dữ liệu trả về
                 const body = document.getElementById("bill-body");
                 body.innerHTML = "";
                 responseData.forEach((row) => {
@@ -171,17 +164,21 @@ document.addEventListener("DOMContentLoaded", () => {
                     ) {
                         const tr = document.createElement("tr");
                         tr.innerHTML = `
-                            <td>${row.ID}</td>
-                            <td>${row.nv}</td>
-                            <td>${formatDateTime(row.ngay_nhan)}</td>
-                            <td>${row.cuahang}</td>
-                        `;
+                    <td>${row.id}</td>
+                    <td>${row.nv_id}</td>
+                    <td>${formatDateTime(row.ngay)}</td>
+                    <td>${row.store_name}</td>
+                `;
                         tr.addEventListener("click", () => {
                             showBillDetailToast(row);
                         });
                         body.appendChild(tr);
                     }
                 });
+            })
+            .catch((err) => {
+                console.error("Lỗi khi gọi API:", err);
+                alert("Đã xảy ra lỗi khi tải dữ liệu");
             });
     });
 
