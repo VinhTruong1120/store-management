@@ -124,7 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const fromBill = document.getElementById("fromDateBill").value;
         const toBill = document.getElementById("toDateBill").value;
         const storeSelect = document.getElementById("storeSelect").value;
-
+        const storename = document.getElementById("storeSelect").options[document.getElementById("storeSelect").selectedIndex].text;
         if (!fromBill || !toBill) {
             alert("Vui lòng chọn đầy đủ khoảng ngày");
             return;
@@ -154,13 +154,14 @@ document.addEventListener("DOMContentLoaded", () => {
             .then((responseData) => {
                 console.log(responseData); // Kiểm tra dữ liệu trả về
                 const body = document.getElementById("bill-body");
+                console.log(body);
                 body.innerHTML = "";
                 responseData.forEach((row) => {
-                    const time = new Date(row.ngay_nhan);
+                    const time = new Date(row.ngay);
                     if (
                         time >= fromDateBill &&
                         time <= toDateBill &&
-                        (!storeSelect || row.cuahang === storeSelect)
+                        (!storename || row.store_name === storename)
                     ) {
                         const tr = document.createElement("tr");
                         tr.innerHTML = `

@@ -399,7 +399,7 @@ public class Chuc_nang_ADMIN_Controller {
             List<don_hang_entity> ls = Don_hang_service.lich_su_don_hang(request.getNgay_bd(), request.getNgay_kt(),
                     request.getStore_id());
             ds_don = ls.stream().map(
-                    don -> new DH_DTO(don.getMa_don(), don.getNv().getTen(), don.getNgay_nhan(),
+                    don -> new DH_DTO(don.getMa_don(), "NV0001", don.getNgay_nhan(),
                             don.getStore().getTen_cua_hang()))
                     .toList();
         
