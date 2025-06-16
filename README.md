@@ -1,4 +1,4 @@
-  ⭐ ⭐ ⭐ ⭐ ⭐ ⭐⭐ ⭐ ⭐ ⭐ ⭐ ⭐⭐ ⭐ ⭐ ⭐ ⭐ ⭐CNPM Group ứng dụng quản lý chuỗi cửa hàng.  ⭐ ⭐ ⭐ ⭐ ⭐ ⭐⭐ ⭐ ⭐ ⭐ ⭐ ⭐⭐ ⭐ ⭐ ⭐ ⭐ ⭐
+            ⭐ ⭐ ⭐ ⭐ ⭐ ⭐⭐ ⭐ ⭐ ⭐ ⭐ ⭐CNPM Group ứng dụng quản lý chuỗi cửa hàng.⭐ ⭐ ⭐ ⭐ ⭐ ⭐⭐ 
   ⭐ ⭐Cách dùng: 
 Bước 1: Tắt hết các server SQL trên máy 
 Bước 2: Tải Docker Desktop  mở Docker Desktop chọn Terminal chạy lần lượt 2 dòng lệnh sau: 
