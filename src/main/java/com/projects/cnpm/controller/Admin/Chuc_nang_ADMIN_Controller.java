@@ -395,14 +395,15 @@ public class Chuc_nang_ADMIN_Controller {
     @PostMapping("/Lich_su_cac_don")
     public ResponseEntity<?> lich_su_cac_don(@RequestBody Lich_su_don request) {
         List<DH_DTO> ds_don;
-        
-            List<don_hang_entity> ls = Don_hang_service.lich_su_don_hang(request.getNgay_bd(), request.getNgay_kt(),
-                    request.getStore_id());
-            ds_don = ls.stream().map(
-                    don -> new DH_DTO(don.getMa_don(), don.getNv().getTen(), don.getNgay_nhan(),
-                            don.getStore().getTen_cua_hang()))
-                    .toList();
-        
+        System.out.println(request.getStore_id());
+        List<don_hang_entity> ls = Don_hang_service.lich_su_don_hang(request.getNgay_bd(), request.getNgay_kt(),
+                request.getStore_id());
+        ds_don = ls.stream().map(
+                don -> new DH_DTO(don.getMa_don(), "nhân viên mặc định", don.getNgay_nhan(),
+                        "cua hang mặc định"))
+                .toList();
+
+        System.out.println(ds_don);
         if (ds_don.isEmpty()) {
             return new ResponseEntity<>("Không tìm thấy lịch sử đơn", HttpStatus.NOT_FOUND);
         }

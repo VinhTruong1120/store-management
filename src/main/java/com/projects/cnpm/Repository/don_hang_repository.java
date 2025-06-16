@@ -48,10 +48,17 @@ public interface don_hang_repository extends JpaRepository<don_hang_entity, Stri
         List<doanh_thu_x_y_DTO> doanhThuTheoNgay(@Param("ngay_BD") Timestamp ngayBD,
                         @Param("ngay_KT") Timestamp ngayKT);
 
-        @Query("Select dh "+
-                "FROM don_hang_entity dh " +
-                "WHERE (dh.ngay_nhan BETWEEN :ngay_BD AND :ngay_KT) and dh.store.store_id = :store_id ")
+        @Query("Select dh " +
+                        "FROM don_hang_entity dh " +
+                        "WHERE (dh.ngay_nhan BETWEEN :ngay_BD AND :ngay_KT) and dh.store.store_id = :store_id ")
         List<don_hang_entity> lich_su_don_hang(@Param("ngay_BD") Timestamp ngayBD,
-                                                @Param("ngay_KT") Timestamp ngayKT,
-                                                @Param("store_id") String Store_id);
+                        @Param("ngay_KT") Timestamp ngayKT,
+                        @Param("store_id") String Store_id);
+
+        @Query("SELECT dh " +
+                        "FROM don_hang_entity dh " +
+                        "WHERE dh.ngay_nhan BETWEEN :ngayBD AND :ngayKT")
+        List<don_hang_entity> lich_su_don_hang2(
+                        @Param("ngayBD") Timestamp ngayBD,
+                        @Param("ngayKT") Timestamp ngayKT);
 }

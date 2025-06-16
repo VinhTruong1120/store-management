@@ -33,27 +33,7 @@
                 </tr>
             </thead>
             <tbody id="store-body">
-                <tr>
-                    <td>1</td>
-                    <td>Chi nhánh Trung tâm</td>
-                    <td>123 Đường Lê Lợi, Q.1, TP.HCM</td>
-                    <td><button class="btn blue">Hoạt động</button></td>
-                    <td><button class="btn">Chỉnh sửa</button> <button class="btn">Tạm ngưng</button></td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Chi nhánh Quận 2</td>
-                    <td>456 Đường Thảo Điền, Q.2, TP.HCM</td>
-                    <td><button class="btn blue">Hoạt động</button></td>
-                    <td><button class="btn">Chỉnh sửa</button> <button class="btn">Tạm ngưng</button></td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Chi nhánh Quận 3</td>
-                    <td>789 Đường Võ Văn Tần, Q.3, TP.HCM</td>
-                    <td><button class="btn rounded">Tạm ngưng</button></td>
-                    <td><button class="btn">Chỉnh sửa</button> <button class="btn">Kích hoạt</button></td>
-                </tr>
+                
             </tbody>
         </table>
     </div>
@@ -122,9 +102,7 @@
             store_id: generateStoreID(),
             ten_ch: document.getElementById("storeName").value,
             dia_chi: document.getElementById("storeAddress").value,
-            contact: [
-                document.getElementById("storePhone").value,
-            ],
+
 
         };
         console.log(data)

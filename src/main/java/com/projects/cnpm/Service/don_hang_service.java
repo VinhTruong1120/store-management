@@ -68,6 +68,10 @@ public class don_hang_service extends BaseSerive<don_hang_entity,String,don_hang
     }
 
     public List<don_hang_entity> lich_su_don_hang(Timestamp ngay_bd,Timestamp ngay_kt,String Store_ID){
+        if (Store_ID == "null" || Store_ID == null) {
+            System.out.println("hello");
+            return repositoty.lich_su_don_hang2(ngay_bd, ngay_kt);
+        }
         return repositoty.lich_su_don_hang(ngay_bd, ngay_kt, Store_ID);
     }
 }
