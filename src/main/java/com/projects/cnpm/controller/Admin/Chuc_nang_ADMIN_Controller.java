@@ -1,5 +1,6 @@
 package com.projects.cnpm.controller.Admin;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +16,8 @@ import com.projects.cnpm.controller.DTO.DH_DTO;
 import com.projects.cnpm.controller.DTO.NV_DTO;
 import com.projects.cnpm.controller.DTO.Role_DTO;
 import com.projects.cnpm.controller.DTO.all_product_DTO;
+import com.projects.cnpm.controller.DTO.chi_tiet;
+import com.projects.cnpm.controller.DTO.lay_CTDH;
 import com.projects.cnpm.controller.requestbody.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.projects.cnpm.DAO.Entity.chi_tiet_DH_entity;
 import com.projects.cnpm.DAO.Entity.cuahang_entity;
 import com.projects.cnpm.DAO.Entity.don_hang_entity;
 import com.projects.cnpm.DAO.Entity.loai_sp_entity;
@@ -399,8 +403,8 @@ public class Chuc_nang_ADMIN_Controller {
             List<don_hang_entity> ls = Don_hang_service.lich_su_don_hang(request.getNgay_bd(), request.getNgay_kt(),
                     request.getStore_id());
             ds_don = ls.stream().map(
-                    don -> new DH_DTO(don.getMa_don(), don.getNv().getTen(), don.getNgay_nhan(),
-                            don.getStore().getTen_cua_hang()))
+                    don -> new DH_DTO(don.getMa_don(),"nhân viên mặc định", don.getNgay_nhan(),
+                            "cửa hàng mặc định"))
                     .toList();
         
         if (ds_don.isEmpty()) {
@@ -408,5 +412,35 @@ public class Chuc_nang_ADMIN_Controller {
         }
         return ResponseEntity.ok(ds_don);
     }
+
+    @PostMapping("/lay_ctdh")
+    public ResponseEntity<?> postMethodName(@RequestBody DH_DTO request) {
+        
+        if(request.getId() == null){
+            System.out.println("mã đơn bị null");
+            return new ResponseEntity<>("Không có đơn hàng bạn cần",HttpStatus.NOT_FOUND);
+        }
+        System.out.println(request.getId());
+        don_hang_entity dh = Don_hang_service.timTheoId(request.getId());
+        List<chi_tiet_DH_entity> ds_ct = Chi_tiet_DH_service.all_chi_tiet_theo_don(dh);
+        if (ds_ct.isEmpty()) {
+            
+            return new ResponseEntity<>("đơn bạn cần là đơn khống",HttpStatus.NOT_FOUND);
+        }
+        
+        lay_CTDH tra_ve = new lay_CTDH();
+        tra_ve.setTong_tien(dh.getThanhTien());
+        List<chi_tiet> ds_Chi_tiet = new ArrayList<>();
+        for (chi_tiet_DH_entity ct : ds_ct) {
+            chi_tiet moi = new chi_tiet(ct.getId().getSan_pham().getMa_sp(),
+                                        ct.getId().getSan_pham().getTen_sp(),
+                                        ct.getId().getSan_pham().getDon_gia(),
+                                        ct.getSo_luong());
+            ds_Chi_tiet.add(moi);
+        }
+        tra_ve.setChi_tiet(ds_Chi_tiet);
+        return ResponseEntity.ok(tra_ve);
+    }
+    
 
 }

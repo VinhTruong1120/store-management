@@ -285,4 +285,6 @@ public class Chuc_nang_manager extends Chuc_nang_ADMIN_Controller {
         return ResponseEntity.ok("thêm thành công");
     }
     
+
+    
 }

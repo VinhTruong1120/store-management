@@ -157,22 +157,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 console.log(body);
                 body.innerHTML = "";
                 responseData.forEach((row) => {
-                    const time = new Date(row.ngay_nhan);
-                    if (
-                        time >= fromDateBill &&
-                        time <= toDateBill &&
-                        (!storeSelect || row.cuahang === storeSelect)
-                    ) {
-                        const tr = document.createElement("tr");
-                        tr.innerHTML = `
+                    console.log(row);
+                    const tr = document.createElement("tr");
+                    tr.innerHTML = `
                     <td>${row.id}</td>
                     <td>${row.nv_id}</td>
                     <td>${formatDateTime(row.ngay)}</td>
                     <td>${row.store_name}</td>
+                    <td><button onclick="showBillDetailToast(this)">Xem</button></td>
                 `;
-                    tr.addEventListener("click", () => {
-                        showBillDetailToast(row);
-                    });
+
                     body.appendChild(tr);
 
                 });
@@ -216,4 +210,50 @@ document.addEventListener("DOMContentLoaded", () => {
 function formatDateTime(str) {
     const d = new Date(str);
     return d.toTimeString().slice(0, 8) + " " + d.toLocaleDateString("vi-VN");
+}
+
+async function showBillDetailToast(button) {
+
+    try {
+        const row = button.closest("tr"); // Lấy <tr> chứa nút
+        const cells = row.querySelectorAll("td"); // Lấy tất cả <td> trong dòng đó
+
+        const maHoaDon = cells[0].textContent;
+        const nhanVien = cells[1].textContent;
+        const cuaHang = cells[3].textContent;
+        const dat = {
+            id: maHoaDon,
+            ngay: "2025-06-16T05:17:59.188+00:00",
+            nv_id: nhanVien,
+            store_name: cuaHang
+        }
+        console.log(dat)
+        const res = await fetch("http://localhost:8080/api/admin/lay_ctdh", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(dat),
+        });
+
+        if (!res.ok) throw new Error("Lỗi không lấy được chi tiết đơn hàng");
+
+        const data = await res.json();
+        const { tong_tien, chi_tiet } = data;
+
+        let content = `Chi tiết đơn hàng ${row.id}\n\n`;
+
+        chi_tiet.forEach((item) => {
+            const { ten_sp, don_gia, so_luong } = item;
+            const thanh_tien = don_gia * so_luong;
+            content += `${ten_sp}: ${so_luong} x ${don_gia.toLocaleString()} = ${thanh_tien.toLocaleString()} đ\n`;
+        });
+
+        content += `\nTổng tiền: ${tong_tien.toLocaleString()} đ`;
+
+        alert(content);
+    } catch (error) {
+        console.log("Có lỗi khi lấy chi tiết đơn hàng", error);
+        alert("Có lỗi khi lấy chi tiết đơn hàng");
+    }
 }

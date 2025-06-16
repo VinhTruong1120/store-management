@@ -7,7 +7,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.projects.cnpm.DAO.Entity.chi_tiet_DH_entity;
 import com.projects.cnpm.DAO.Entity.cuahang_entity;
+import com.projects.cnpm.DAO.Entity.don_hang_entity;
 import com.projects.cnpm.DAO.Entity.nhanvien_entity;
 import com.projects.cnpm.DAO.Entity.role_entity;
 import com.projects.cnpm.Repository.nhanvien_repository;
@@ -110,5 +112,7 @@ public class nhanvien_service extends BaseSerive<nhanvien_entity,String,nhanvien
         repositoty.deleteById(id);;
         return 1;
     }
+    
+    
 }
 

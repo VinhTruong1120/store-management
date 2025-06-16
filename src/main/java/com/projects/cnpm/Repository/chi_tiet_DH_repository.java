@@ -3,6 +3,7 @@ package com.projects.cnpm.Repository;
 import com.projects.cnpm.DAO.Entity.Embeddable.CTDH_ID;
 import com.projects.cnpm.controller.DTO.doanh_thu_x_y_DTO;
 import com.projects.cnpm.DAO.Entity.chi_tiet_DH_entity;
+import com.projects.cnpm.DAO.Entity.don_hang_entity;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -44,4 +45,6 @@ public interface chi_tiet_DH_repository extends JpaRepository<chi_tiet_DH_entity
         @Query("DELETE FROM chi_tiet_DH_entity c WHERE c.id.san_pham.ma_sp = :id")
         void deleteBySanPhamId(@Param("id") String id);
 
+        @Query("Select CTDH from chi_tiet_DH_entity CTDH where CTDH.id.don_hang = :dh")
+        List<chi_tiet_DH_entity> tim_chi_tiet_theo_don(@Param("dh") don_hang_entity dh);
 }

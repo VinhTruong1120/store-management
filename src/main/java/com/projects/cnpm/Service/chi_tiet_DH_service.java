@@ -2,7 +2,7 @@ package com.projects.cnpm.Service;
 
 import com.projects.cnpm.DAO.Entity.Embeddable.CTDH_ID;
 import com.projects.cnpm.DAO.Entity.chi_tiet_DH_entity;
-
+import com.projects.cnpm.DAO.Entity.don_hang_entity;
 import com.projects.cnpm.Repository.chi_tiet_DH_repository;
 import com.projects.cnpm.controller.DTO.doanh_thu_x_y_DTO;
 
@@ -47,5 +47,9 @@ public class chi_tiet_DH_service extends BaseSerive<chi_tiet_DH_entity, CTDH_ID,
 
     public List<doanh_thu_x_y_DTO> doanh_thu_xx_den_yy() {
        return repositoty.thanh_tien_theo_don_hoang_thanh1();
+    }
+
+    public List<chi_tiet_DH_entity> all_chi_tiet_theo_don(don_hang_entity dh){
+        return repositoty.tim_chi_tiet_theo_don(dh);
     }
 }
